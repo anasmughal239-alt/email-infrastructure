@@ -27,9 +27,15 @@ services:
         value: https://email-infrastructure.onrender.com
       - key: NEXTAUTH_SECRET
         generateValue: true
+      - key: RESEND_API_KEY
+        sync: false
     autoDeploy: true
     branch: main
     rootDir: .
+    
+    # Node.js version
+    runtime: node
+    runtimeVersion: "18"
     
     # Performance optimizations
     disk:
