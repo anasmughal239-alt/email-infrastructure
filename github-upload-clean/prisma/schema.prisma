@@ -1,0 +1,203 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model with authentication and subscription fields
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  hashedPassword    String?
+  role              Role      @default(USER)
+  subscriptionStatus SubscriptionStatus @default(FREE)
+  name              String?
+  emailVerified     DateTime?
+  isEmailVerified   Boolean   @default(false)
+  image             String?
+  setupCompleted    Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // NextAuth.js relations
+  accounts Account[]
+  sessions Session[]
+  
+  // Setup wizard relations
+  setupRequests SetupRequest[]
+  domains       Domain[]
+  mailboxes     Mailbox[]
+
+  @@map("users")
+}
+
+// NextAuth.js required models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// Email verification codes for user registration
+model EmailVerificationCode {
+  id        String   @id @default(cuid())
+  email     String
+  code      String
+  attempts  Int      @default(0)
+  verified  Boolean  @default(false)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([email, code])
+  @@map("email_verification_codes")
+}
+
+// Setup wizard models
+model SetupRequest {
+  id              String            @id @default(cuid())
+  userId          String
+  emailProvider   EmailProvider
+  status          SetupStatus       @default(PENDING)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  completedAt     DateTime?
+
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domains         Domain[]
+  mailboxes       Mailbox[]
+
+  @@map("setup_requests")
+}
+
+model Domain {
+  id              String            @id @default(cuid())
+  userId          String
+  setupRequestId  String
+  domain          String
+  status          DomainStatus      @default(PENDING)
+  isProvided      Boolean           @default(false) // true if user requested domain provision
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  setupRequest    SetupRequest      @relation(fields: [setupRequestId], references: [id], onDelete: Cascade)
+  mailboxes       Mailbox[]
+
+  @@map("domains")
+}
+
+model Mailbox {
+  id              String            @id @default(cuid())
+  userId          String
+  setupRequestId  String
+  domainId        String
+  prefix          String
+  address         String            // full email address (prefix@domain.com)
+  status          MailboxStatus     @default(WARMING)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  setupRequest    SetupRequest      @relation(fields: [setupRequestId], references: [id], onDelete: Cascade)
+  domain          Domain            @relation(fields: [domainId], references: [id], onDelete: Cascade)
+
+  @@map("mailboxes")
+}
+
+// Enums for user roles and subscription status
+enum Role {
+  USER
+  ADMIN
+}
+
+enum SubscriptionStatus {
+  FREE
+  BASIC
+  PRO
+  ENTERPRISE
+}
+
+// Setup wizard enums
+enum EmailProvider {
+  GOOGLE_WORKSPACE
+  MICROSOFT_OUTLOOK
+}
+
+enum SetupStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum DomainStatus {
+  PENDING
+  VERIFIED
+  ACTIVE
+  FAILED
+}
+
+enum MailboxStatus {
+  WARMING
+  ACTIVE
+  BLOCKED
+  FAILED
+}
+
+// Lead model for capturing leads from tools
+model Lead {
+  id                 String   @id @default(cuid())
+  email              String   @unique
+  domain             String?
+  toolUsed           String?
+  lastToolUsed       String?
+  lastDomainChecked  String?
+  toolUsageCount     Int      @default(1)
+  lastActivity       DateTime @default(now())
+  results            String?  // JSON string of results
+  source             String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("leads")
+}
