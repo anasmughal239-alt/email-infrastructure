@@ -8,7 +8,7 @@ import {
   FiEye,
   FiServer,
   FiDatabase,
-  FiGlobe,
+  FiHome,
   FiUsers,
   FiCheckCircle,
   FiAlertTriangle,
@@ -16,11 +16,10 @@ import {
   FiDownload,
   FiExternalLink,
   FiClock,
-  FiActivity,
+  FiMail,
   FiZap,
   FiHeart,
   FiAward,
-  FiTrendingUp,
   FiMonitor,
   FiWifi
 } from 'react-icons/fi'
@@ -167,7 +166,7 @@ export default function SecurityPage() {
       value: '99.99%',
       period: 'Last 12 months',
       trend: 'up',
-      icon: FiActivity
+      icon: FiMail
     },
     {
       metric: 'Response Time',
@@ -290,9 +289,7 @@ export default function SecurityPage() {
                   viewport={{ once: true }}
                   className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center"
                 >
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-6 h-6 text-blue-600" />
-                  </div>
+                  <Icon className="w-12 h-12 text-gray-600 mx-auto mb-4" />
                   <div className="text-2xl font-bold text-gray-900 mb-1">{metric.value}</div>
                   <div className="text-sm font-medium text-gray-900 mb-1">{metric.metric}</div>
                   <div className="text-xs text-gray-500">{metric.period}</div>
@@ -327,9 +324,7 @@ export default function SecurityPage() {
                   viewport={{ once: true }}
                   className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
                 >
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-blue-600" />
-                  </div>
+                  <Icon className="w-12 h-12 text-gray-600 mb-4" />
                   <h3 className="font-semibold text-gray-900 mb-3">{feature.title}</h3>
                   <p className="text-gray-600 text-sm mb-4">{feature.description}</p>
                   <ul className="space-y-1">
@@ -450,9 +445,7 @@ export default function SecurityPage() {
                   className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-blue-600" />
-                    </div>
+                    <Icon className="w-12 h-12 text-gray-600" />
                     <div className="flex-1">
                       <h3 className="font-semibold text-gray-900 mb-2">{resource.title}</h3>
                       <p className="text-gray-600 text-sm mb-3">{resource.description}</p>

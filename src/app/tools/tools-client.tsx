@@ -3,14 +3,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  FiShield, 
   FiMail, 
   FiCheck, 
-  FiX, 
-  FiAlertTriangle, 
-  FiLoader,
-  FiDownload,
-  FiEye
+  FiUsers,
+  FiHome
 } from 'react-icons/fi';
 
 interface CheckResult {
@@ -145,9 +141,9 @@ export default function ToolsClient() {
   };
 
   const getStatusIcon = (valid: boolean, exists: boolean) => {
-    if (!exists) return <FiX className="text-red-500" />;
+    if (!exists) return <FiMail className="text-red-500" />;
     if (valid) return <FiCheck className="text-green-500" />;
-    return <FiAlertTriangle className="text-yellow-500" />;
+    return <FiUsers className="text-yellow-500" />;
   };
 
   const getStatusText = (valid: boolean, exists: boolean) => {
@@ -172,8 +168,8 @@ export default function ToolsClient() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full mb-6">
-            <FiShield className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+          <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <FiCheck className="w-10 h-10 text-blue-600 dark:text-blue-400" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Free Email Authentication Checker
@@ -214,12 +210,12 @@ export default function ToolsClient() {
                 >
                   {isChecking ? (
                     <>
-                      <FiLoader className="animate-spin" />
+                      <FiHome className="animate-spin" />
                       Checking...
                     </>
                   ) : (
                     <>
-                      <FiEye />
+                      <FiUsers />
                       Check Records
                     </>
                   )}
@@ -236,7 +232,7 @@ export default function ToolsClient() {
                 className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6"
               >
                 <div className="flex items-start gap-3">
-                  <FiX className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                  <FiMail className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
                   <div>
                     <h4 className="text-red-800 dark:text-red-200 font-semibold mb-1">Error</h4>
                     <p className="text-red-700 dark:text-red-300 text-sm">{error}</p>
@@ -310,7 +306,7 @@ export default function ToolsClient() {
                       <ul className="text-sm text-red-600 dark:text-red-400 space-y-1">
                         {results.spf.issues.map((issue, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <FiX className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                            <FiMail className="w-4 h-4 mt-0.5 flex-shrink-0" />
                             {issue}
                           </li>
                         ))}
@@ -324,7 +320,7 @@ export default function ToolsClient() {
                       <ul className="text-sm text-yellow-600 dark:text-yellow-400 space-y-1">
                         {results.spf.warnings.map((warning, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <FiAlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                            <FiUsers className="w-4 h-4 mt-0.5 flex-shrink-0" />
                             {warning}
                           </li>
                         ))}
@@ -369,7 +365,7 @@ export default function ToolsClient() {
                       <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Checked Selectors:</div>
                       <div className="flex flex-wrap gap-2">
                         {results.dkim.selectors.map((selector, index) => (
-                          <span key={index} className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded">
+                          <span key={index} className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-xs rounded">
                             {selector}
                           </span>
                         ))}
@@ -390,7 +386,7 @@ export default function ToolsClient() {
                       <ul className="text-sm text-red-600 dark:text-red-400 space-y-1">
                         {results.dkim.issues.map((issue, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <FiX className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                            <FiMail className="w-4 h-4 mt-0.5 flex-shrink-0" />
                             {issue}
                           </li>
                         ))}
@@ -404,7 +400,7 @@ export default function ToolsClient() {
                       <ul className="text-sm text-yellow-600 dark:text-yellow-400 space-y-1">
                         {results.dkim.warnings.map((warning, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <FiAlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                            <FiUsers className="w-4 h-4 mt-0.5 flex-shrink-0" />
                             {warning}
                           </li>
                         ))}
@@ -470,7 +466,7 @@ export default function ToolsClient() {
                       <ul className="text-sm text-red-600 dark:text-red-400 space-y-1">
                         {results.dmarc.issues.map((issue, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <FiX className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                            <FiMail className="w-4 h-4 mt-0.5 flex-shrink-0" />
                             {issue}
                           </li>
                         ))}
@@ -484,7 +480,7 @@ export default function ToolsClient() {
                       <ul className="text-sm text-yellow-600 dark:text-yellow-400 space-y-1">
                         {results.dmarc.warnings.map((warning, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <FiAlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                            <FiUsers className="w-4 h-4 mt-0.5 flex-shrink-0" />
                             {warning}
                           </li>
                         ))}
@@ -542,12 +538,12 @@ export default function ToolsClient() {
                 >
                   {isSubmittingLead ? (
                     <>
-                      <FiLoader className="animate-spin" />
+                      <FiHome className="animate-spin" />
                       Sending...
                     </>
                   ) : (
                     <>
-                      <FiDownload />
+                      <FiUsers />
                       Get Report
                     </>
                   )}
@@ -589,8 +585,8 @@ export default function ToolsClient() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full mb-4">
-                <FiShield className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FiCheck className="w-8 h-8 text-blue-600 dark:text-blue-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 Comprehensive Analysis
@@ -601,8 +597,8 @@ export default function ToolsClient() {
             </div>
             
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full mb-4">
-                <FiMail className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FiMail className="w-8 h-8 text-blue-600 dark:text-blue-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 Improve Deliverability
@@ -613,8 +609,8 @@ export default function ToolsClient() {
             </div>
             
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full mb-4">
-                <FiCheck className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FiCheck className="w-8 h-8 text-blue-600 dark:text-blue-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 Expert Recommendations

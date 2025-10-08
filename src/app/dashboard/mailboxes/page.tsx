@@ -6,22 +6,9 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { 
   FiMail, 
-  FiPlus, 
-  FiSearch, 
-  FiMoreVertical, 
-  FiEdit, 
-  FiTrash2, 
-  FiCopy,
-  FiCheck,
-  FiX,
-  FiActivity,
-  FiClock,
-  FiCheckCircle,
-  FiAlertTriangle,
-  FiSettings,
-  FiPause,
-  FiPlay,
-  FiLoader
+  FiUsers, 
+  FiHome, 
+  FiCheck
 } from 'react-icons/fi';
 
 interface Mailbox {
@@ -42,10 +29,10 @@ interface Mailbox {
 }
 
 const statusIcons = {
-  'Active': FiCheckCircle,
-  'Warming': FiClock,
-  'Paused': FiPause,
-  'Issues': FiAlertTriangle
+  'Active': FiCheck,
+  'Warming': FiHome,
+  'Paused': FiUsers,
+  'Issues': FiMail
 };
 
 export default function MailboxesPage() {
@@ -110,7 +97,7 @@ export default function MailboxesPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="flex items-center space-x-2">
-          <FiLoader className="w-6 h-6 animate-spin text-primary" />
+          <FiUsers className="w-6 h-6 animate-spin text-primary" />
           <span className="text-muted-foreground">Loading mailboxes...</span>
         </div>
       </div>
@@ -122,7 +109,7 @@ export default function MailboxesPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <FiAlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+          <FiMail className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-foreground mb-2">Error Loading Mailboxes</h3>
           <p className="text-muted-foreground mb-4">{error}</p>
           <button
@@ -150,7 +137,7 @@ export default function MailboxesPage() {
           onClick={() => setShowAddModal(true)}
           className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2"
         >
-          <FiPlus className="w-4 h-4" />
+          <FiHome className="w-4 h-4" />
           Add Mailbox
         </button>
       </div>
@@ -186,7 +173,7 @@ export default function MailboxesPage() {
               <p className="text-3xl font-bold text-foreground">{stats.active}</p>
             </div>
             <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-              <FiCheckCircle className="w-6 h-6 text-white" />
+              <FiCheck className="w-6 h-6 text-white" />
             </div>
           </div>
         </motion.div>
@@ -203,7 +190,7 @@ export default function MailboxesPage() {
               <p className="text-3xl font-bold text-foreground">{stats.warming}</p>
             </div>
             <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
-              <FiClock className="w-6 h-6 text-white" />
+              <FiHome className="w-6 h-6 text-white" />
             </div>
           </div>
         </motion.div>
@@ -220,7 +207,7 @@ export default function MailboxesPage() {
               <p className="text-3xl font-bold text-foreground">{stats.totalSentToday}</p>
             </div>
             <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
-              <FiActivity className="w-6 h-6 text-white" />
+              <FiMail className="w-6 h-6 text-white" />
             </div>
           </div>
         </motion.div>
@@ -230,7 +217,7 @@ export default function MailboxesPage() {
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div className="flex items-center space-x-4">
           <div className="relative">
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
             <input
               type="text"
               placeholder="Search mailboxes..."
@@ -360,22 +347,22 @@ export default function MailboxesPage() {
                     {/* Actions */}
                     <div className="flex items-center space-x-2">
                       <button className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
-                        <FiSettings className="w-4 h-4" />
+                        <FiHome className="w-4 h-4" />
                       </button>
                       {mailbox.status === 'Paused' ? (
                         <button className="p-2 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors">
-                          <FiPlay className="w-4 h-4" />
+                          <FiCheck className="w-4 h-4" />
                         </button>
                       ) : (
                         <button className="p-2 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-lg transition-colors">
-                          <FiPause className="w-4 h-4" />
+                          <FiUsers className="w-4 h-4" />
                         </button>
                       )}
                       <button 
                         className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                         onClick={() => setSelectedMailbox(selectedMailbox === mailbox.id ? null : mailbox.id)}
                       >
-                        <FiMoreVertical className="w-4 h-4" />
+                        <FiMail className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
@@ -432,15 +419,15 @@ export default function MailboxesPage() {
                         <h4 className="font-medium text-foreground mb-3">Quick Actions</h4>
                         <div className="space-y-2">
                           <button className="w-full flex items-center space-x-2 p-2 text-left hover:bg-muted rounded border border-border transition-colors">
-                            <FiCopy className="w-4 h-4 text-muted-foreground" />
+                            <FiMail className="w-4 h-4 text-muted-foreground" />
                             <span className="text-sm text-foreground">Copy Email</span>
                           </button>
                           <button className="w-full flex items-center space-x-2 p-2 text-left hover:bg-muted rounded border border-border transition-colors">
-                            <FiEdit className="w-4 h-4 text-muted-foreground" />
+                            <FiUsers className="w-4 h-4 text-muted-foreground" />
                             <span className="text-sm text-foreground">Edit Settings</span>
                           </button>
                           <button className="w-full flex items-center space-x-2 p-2 text-left hover:bg-red-50 dark:hover:bg-red-900/20 rounded border border-border transition-colors text-red-600">
-                            <FiTrash2 className="w-4 h-4" />
+                            <FiHome className="w-4 h-4" />
                             <span className="text-sm">Remove Mailbox</span>
                           </button>
                         </div>

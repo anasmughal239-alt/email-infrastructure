@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FiSettings, FiMail, FiBarChart, FiLink, FiShield, FiZap, FiGlobe, FiCheckCircle } from 'react-icons/fi';
+import { FiCheckCircle, FiHome, FiLink, FiMail, FiSettings, FiShield, FiZap } from 'react-icons/fi';
 
 const features = [
   {
@@ -20,7 +20,7 @@ const features = [
     illustration: '📧'
   },
   {
-    icon: FiBarChart,
+    icon: FiMail,
     title: 'Deliverability Insights Dashboard',
     description: 'Real-time analytics and insights into your email performance, deliverability rates, and sender reputation.',
     benefits: ['Real-time deliverability tracking', 'Sender reputation monitoring', 'Bounce rate analysis', 'Spam folder detection'],
@@ -49,7 +49,7 @@ const additionalFeatures = [
     benefits: ['5-minute setup', 'Automated configuration', 'Instant activation']
   },
   {
-    icon: FiGlobe,
+    icon: FiHome,
     title: 'Global Infrastructure',
     description: 'Worldwide email delivery with optimized routing and local compliance.',
     benefits: ['Global delivery network', 'Local compliance', 'Multi-region support']

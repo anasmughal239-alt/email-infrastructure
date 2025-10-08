@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FiTrendingUp, FiMail, FiCheckCircle, FiAlertTriangle, FiBarChart } from 'react-icons/fi';
+import { FiAlertTriangle, FiCheckCircle, FiMail } from 'react-icons/fi';
 
 export default function DeliverabilityPage() {
   const deliverabilityScore = 87;
@@ -46,8 +46,8 @@ export default function DeliverabilityPage() {
               <p className="text-sm font-medium text-muted-foreground">Deliverability Score</p>
               <p className="text-3xl font-bold text-foreground">{deliverabilityScore}%</p>
             </div>
-            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
-              <FiTrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
+            <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center">
+              <FiMail className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             </div>
           </div>
           <div className="mt-4">
@@ -71,9 +71,7 @@ export default function DeliverabilityPage() {
               <p className="text-sm font-medium text-muted-foreground">Inbox Placement</p>
               <p className="text-3xl font-bold text-foreground">{inboxPlacement}%</p>
             </div>
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
-              <FiMail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-            </div>
+            <FiMail className="w-12 h-12 text-gray-600 dark:text-gray-400" />
           </div>
           <div className="mt-4">
             <div className="w-full bg-muted rounded-full h-2">
@@ -96,8 +94,8 @@ export default function DeliverabilityPage() {
               <p className="text-sm font-medium text-muted-foreground">Spam Rate</p>
               <p className="text-3xl font-bold text-foreground">{spamRate}%</p>
             </div>
-            <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/20 rounded-lg flex items-center justify-center">
-              <FiAlertTriangle className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+            <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/20 rounded-full flex items-center justify-center">
+              <FiAlertTriangle className="w-8 h-8 text-orange-600 dark:text-orange-400" />
             </div>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
@@ -116,8 +114,8 @@ export default function DeliverabilityPage() {
               <p className="text-sm font-medium text-muted-foreground">Bounce Rate</p>
               <p className="text-3xl font-bold text-foreground">{bounceRate}%</p>
             </div>
-            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
-              <FiBarChart className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center">
+              <FiMail className="w-8 h-8 text-red-600 dark:text-red-400" />
             </div>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
@@ -202,7 +200,7 @@ export default function DeliverabilityPage() {
                       {test.status === 'Excellent' ? (
                         <FiCheckCircle className="w-3 h-3 mr-1" />
                       ) : (
-                        <FiTrendingUp className="w-3 h-3 mr-1" />
+                        <FiMail className="w-3 h-3 mr-1" />
                       )}
                       {test.status}
                     </span>

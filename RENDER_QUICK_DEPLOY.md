@@ -28,10 +28,11 @@
 - Configure settings:
   ```
   Name: email-infrastructure
-  Runtime: Node
-  Build: npm install && npm run build
-  Start: npm start
-  Node: 18
+  Environment: Node
+  Runtime: node
+  Build Command: npm ci && npx prisma generate && npm run build
+  Start Command: npm start
+  Node Version: 18
   ```
 
 ### 5. Environment Variables

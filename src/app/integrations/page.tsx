@@ -13,7 +13,7 @@ import {
   FiCloud,
   FiShoppingCart,
   FiUsers,
-  FiBarChart
+  FiMail
 } from 'react-icons/fi'
 import Link from 'next/link'
 
@@ -101,7 +101,7 @@ export default function IntegrationsPage() {
         {
           name: 'HubSpot',
           description: 'Integrated marketing automation and lead nurturing',
-          icon: FiBarChart,
+          icon: FiMail,
           status: 'available',
           color: 'bg-orange-500'
         },
@@ -142,14 +142,14 @@ export default function IntegrationsPage() {
         {
           name: 'Google Analytics',
           description: 'Track email campaign performance and user behavior',
-          icon: FiBarChart,
+          icon: FiMail,
           status: 'available',
           color: 'bg-orange-400'
         },
         {
           name: 'Mixpanel',
           description: 'Advanced email analytics and user segmentation',
-          icon: FiBarChart,
+          icon: FiMail,
           status: 'coming-soon',
           color: 'bg-purple-500'
         }

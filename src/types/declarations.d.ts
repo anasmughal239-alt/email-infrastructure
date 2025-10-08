@@ -119,7 +119,7 @@ declare module 'react-icons/fi' {
   export const FiPieChart: ComponentType<IconProps>;
   export const FiSettings: ComponentType<IconProps>;
   export const FiUsers: ComponentType<IconProps>;
-  export const FiBarChart2: ComponentType<IconProps>;
+  export const FiMail2: ComponentType<IconProps>;
   export const FiArrowUp: ComponentType<IconProps>;
   export const FiArrowDown: ComponentType<IconProps>;
   export const FiChevronLeft: ComponentType<IconProps>;

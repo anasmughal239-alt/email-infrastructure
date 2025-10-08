@@ -7,7 +7,7 @@ import {
   FiLock, 
   FiEye, 
   FiUserCheck, 
-  FiGlobe, 
+  FiHome, 
   FiMail, 
   FiSettings,
   FiTrash2,
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
     {
       id: 'international',
       title: 'International Transfers',
-      icon: FiGlobe,
+      icon: FiHome,
       content: [
         'Your information may be transferred to and processed in countries other than your own.',
         'We ensure appropriate safeguards are in place for international data transfers.',

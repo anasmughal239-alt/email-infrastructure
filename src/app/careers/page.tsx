@@ -2,21 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { 
-  FiMapPin, 
-  FiClock, 
-  FiDollarSign, 
-  FiUsers,
-  FiHeart,
-  FiCoffee,
-  FiHome,
-  FiTrendingUp,
-  FiShield,
-  FiZap,
-  FiGlobe,
-  FiCalendar,
-  FiArrowRight,
-  FiExternalLink,
-  FiFilter
+  FiMail, 
+  FiUsers, 
+  FiHome, 
+  FiCheck
 } from 'react-icons/fi'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -46,7 +35,7 @@ export default function CareersPage() {
 
   const benefits = [
     {
-      icon: FiHeart,
+      icon: FiCheck,
       title: 'Health & Wellness',
       description: 'Comprehensive health, dental, and vision insurance for you and your family'
     },
@@ -56,22 +45,22 @@ export default function CareersPage() {
       description: 'Work from anywhere with flexible hours and home office stipend'
     },
     {
-      icon: FiTrendingUp,
+      icon: FiMail,
       title: 'Growth & Learning',
       description: '$2,000 annual learning budget and conference attendance'
     },
     {
-      icon: FiCalendar,
+      icon: FiUsers,
       title: 'Time Off',
       description: 'Unlimited PTO and company-wide mental health days'
     },
     {
-      icon: FiDollarSign,
+      icon: FiMail,
       title: 'Equity & Salary',
       description: 'Competitive salary with equity participation in company success'
     },
     {
-      icon: FiCoffee,
+      icon: FiHome,
       title: 'Perks & More',
       description: 'Catered meals, team retreats, and top-tier equipment'
     }
@@ -206,7 +195,7 @@ export default function CareersPage() {
                 className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 justify-center"
               >
                 View Open Positions
-                <FiArrowRight className="w-5 h-5" />
+                <FiMail className="w-5 h-5" />
               </a>
               <a 
                 href="#culture" 
@@ -317,7 +306,7 @@ export default function CareersPage() {
           {/* Filters */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
             <div className="flex items-center gap-4 mb-4">
-              <FiFilter className="w-5 h-5 text-gray-400" />
+              <FiCheck className="w-5 h-5 text-gray-400" />
               <span className="font-medium text-gray-900">Filter Positions</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -374,19 +363,19 @@ export default function CareersPage() {
                     
                     <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-3">
                       <div className="flex items-center gap-1">
-                        <FiMapPin className="w-4 h-4" />
+                        <FiHome className="w-4 h-4" />
                         {locations.find(l => l.id === job.location)?.name}
                       </div>
                       <div className="flex items-center gap-1">
-                        <FiClock className="w-4 h-4" />
+                        <FiCheck className="w-4 h-4" />
                         {job.type}
                       </div>
                       <div className="flex items-center gap-1">
-                        <FiDollarSign className="w-4 h-4" />
+                        <FiMail className="w-4 h-4" />
                         {job.salary}
                       </div>
                       <div className="flex items-center gap-1">
-                        <FiCalendar className="w-4 h-4" />
+                        <FiUsers className="w-4 h-4" />
                         Posted {formatDate(job.posted)}
                       </div>
                     </div>
@@ -408,7 +397,7 @@ export default function CareersPage() {
                   <div className="mt-4 lg:mt-0 lg:ml-6">
                     <button className="w-full lg:w-auto bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 justify-center">
                       Apply Now
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiMail className="w-4 h-4" />
                     </button>
                   </div>
                 </div>

@@ -9,7 +9,7 @@ import {
   FiTrash2,
   FiDownload,
   FiLock,
-  FiGlobe,
+  FiHome,
   FiFileText,
   FiCheckCircle,
   FiClock,
@@ -500,7 +500,7 @@ export default function GDPRPage() {
                     <tr key={transfer.region} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-2">
-                          <FiGlobe className="w-4 h-4 text-gray-500" />
+                          <FiHome className="w-4 h-4 text-gray-500" />
                           <span className="text-sm font-medium text-gray-900">{transfer.region}</span>
                         </div>
                       </td>

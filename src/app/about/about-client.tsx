@@ -4,43 +4,36 @@ import { motion } from 'framer-motion';
 import { 
   FiMail, 
   FiUsers, 
-  FiGlobe, 
-  FiTrendingUp,
-  FiHeart,
-  FiShield,
-  FiZap,
-  FiTarget,
-  FiLinkedin,
-  FiTwitter,
-  FiGithub
+  FiHome, 
+  FiCheck
 } from 'react-icons/fi';
 
 export default function AboutClient() {
   const stats = [
     { label: 'Emails Delivered', value: '10B+', icon: FiMail },
     { label: 'Happy Customers', value: '50K+', icon: FiUsers },
-    { label: 'Countries Served', value: '150+', icon: FiGlobe },
-    { label: 'Uptime', value: '99.9%', icon: FiTrendingUp }
+    { label: 'Countries Served', value: '150+', icon: FiHome },
+    { label: 'Uptime', value: '99.9%', icon: FiMail }
   ];
 
   const values = [
     {
-      icon: FiHeart,
+      icon: FiCheck,
       title: 'Customer First',
       description: 'Every decision we make is guided by what\'s best for our customers and their success.'
     },
     {
-      icon: FiShield,
+      icon: FiCheck,
       title: 'Security & Privacy',
       description: 'We prioritize the security and privacy of your data with enterprise-grade protection.'
     },
     {
-      icon: FiZap,
+      icon: FiMail,
       title: 'Innovation',
       description: 'We continuously push the boundaries of email infrastructure technology.'
     },
     {
-      icon: FiTarget,
+      icon: FiUsers,
       title: 'Reliability',
       description: 'Our platform is built for scale and reliability, ensuring your emails always reach their destination.'
     }
@@ -213,8 +206,8 @@ export default function AboutClient() {
                   viewport={{ once: true }}
                   className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center"
                 >
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-6 h-6 text-blue-600" />
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-8 h-8 text-blue-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-3">{value.title}</h3>
                   <p className="text-gray-600 text-sm">{value.description}</p>
@@ -256,17 +249,17 @@ export default function AboutClient() {
                 <div className="flex justify-center gap-3">
                   {member.social.linkedin && (
                     <a href={member.social.linkedin} className="text-gray-400 hover:text-blue-600 transition-colors">
-                      <FiLinkedin className="w-5 h-5" />
+                      <FiMail className="w-5 h-5" />
                     </a>
                   )}
                   {member.social.twitter && (
                     <a href={member.social.twitter} className="text-gray-400 hover:text-blue-400 transition-colors">
-                      <FiTwitter className="w-5 h-5" />
+                      <FiUsers className="w-5 h-5" />
                     </a>
                   )}
                   {member.social.github && (
                     <a href={member.social.github} className="text-gray-400 hover:text-gray-900 transition-colors">
-                      <FiGithub className="w-5 h-5" />
+                      <FiHome className="w-5 h-5" />
                     </a>
                   )}
                 </div>

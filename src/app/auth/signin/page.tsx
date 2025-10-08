@@ -5,7 +5,7 @@ import { signIn, getSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi'
+import { FiEye, FiEyeOff, FiLock, FiMail } from 'react-icons/fi';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('')

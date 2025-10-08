@@ -7,15 +7,35 @@ services:
     databases:
       - name: email_infra_db
         user: email_infra_user
+    # Database configuration
+    ipAllowList: []  # Allow all IPs for Render services
+    
+  # Redis Cache (Optional - for session storage and caching)
+  - type: redis
+    name: email-infra-redis
+    env: node
+    plan: free
+    ipAllowList: []
 
-  # Web Service
+  # Web Service with Native Node.js
   - type: web
     name: email-infrastructure
     env: node
     plan: free
+    
+    # Native Node.js configuration
+    runtime: node
+    
+    # Build configuration
     buildCommand: npm ci && npx prisma generate && npm run build
-    startCommand: npx prisma migrate deploy && npm start
+    
+    # Start command for native deployment
+    startCommand: npm start
+    
+    # Health check configuration
     healthCheckPath: /api/health
+    
+    # Environment variables
     envVars:
       - key: NODE_ENV
         value: production
@@ -23,30 +43,68 @@ services:
         fromDatabase:
           name: email-infra-db
           property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: email-infra-redis
+          property: connectionString
       - key: NEXTAUTH_URL
         value: https://email-infrastructure.onrender.com
       - key: NEXTAUTH_SECRET
         generateValue: true
       - key: RESEND_API_KEY
         sync: false
+      - key: FROM_EMAIL
+        value: noreply@yourdomain.com
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: PORT
+        value: "3000"
+    
+    # Deployment configuration
     autoDeploy: true
     branch: main
     rootDir: .
-    
-    # Node.js version
-    runtime: node
-    runtimeVersion: "18"
     
     # Performance optimizations
     disk:
       name: email-infra-disk
       mountPath: /opt/render/project/.next
-      sizeGB: 1
+      sizeGB: 2
     
-    # Health check configuration
-    healthCheck:
-      path: /api/health
-      intervalSeconds: 30
-      timeoutSeconds: 10
-      unhealthyThresholdCount: 3
-      healthyThresholdCount: 2
+    # Advanced health check configuration
+     healthCheck:
+       path: /api/health
+       intervalSeconds: 30
+       timeoutSeconds: 15
+       unhealthyThresholdCount: 3
+       healthyThresholdCount: 2
+     
+     # Resource limits and scaling
+     numInstances: 1
+     
+     # Custom headers for security
+     headers:
+       - path: /*
+         name: X-Frame-Options
+         value: DENY
+       - path: /*
+         name: X-Content-Type-Options
+         value: nosniff
+       - path: /*
+         name: Referrer-Policy
+         value: strict-origin-when-cross-origin
+       - path: /*
+         name: Permissions-Policy
+         value: camera=(), microphone=(), geolocation=()
+     
+     # Routes configuration
+     routes:
+       - type: rewrite
+         source: /api/*
+         destination: /api/$1
+       - type: rewrite
+         source: /_next/static/*
+         destination: /_next/static/$1
+         headers:
+           Cache-Control: public, max-age=31536000, immutable

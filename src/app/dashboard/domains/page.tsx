@@ -2,18 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { 
-  FiGlobe, 
-  FiPlus, 
-  FiCheckCircle, 
-  FiClock, 
-  FiAlertTriangle,
-  FiMoreVertical,
-  FiSettings,
-  FiTrash2,
-  FiCopy,
-  FiExternalLink,
-  FiRefreshCw,
-  FiLoader
+  FiMail,
+  FiUsers,
+  FiHome,
+  FiCheck
 } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
@@ -31,27 +23,27 @@ interface Domain {
 const statusConfig = {
   PENDING: {
     label: 'Pending',
-    color: 'text-orange-600',
+    color: 'text-orange-600 dark:text-orange-400',
     bg: 'bg-orange-100 dark:bg-orange-900/20',
-    icon: FiClock
+    icon: FiHome
   },
   VERIFIED: {
     label: 'Verified',
-    color: 'text-green-600',
+    color: 'text-green-600 dark:text-green-400',
     bg: 'bg-green-100 dark:bg-green-900/20',
-    icon: FiCheckCircle
+    icon: FiCheck
   },
   ACTIVE: {
     label: 'Active',
-    color: 'text-green-600',
+    color: 'text-green-600 dark:text-green-400',
     bg: 'bg-green-100 dark:bg-green-900/20',
-    icon: FiCheckCircle
+    icon: FiCheck
   },
   FAILED: {
     label: 'Failed',
-    color: 'text-red-600',
+    color: 'text-red-600 dark:text-red-400',
     bg: 'bg-red-100 dark:bg-red-900/20',
-    icon: FiAlertTriangle
+    icon: FiMail
   }
 };
 
@@ -131,7 +123,7 @@ export default function DomainsPage() {
   if (status === 'loading' || loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <FiLoader className="w-8 h-8 animate-spin text-primary" />
+        <FiUsers className="w-8 h-8 animate-spin text-primary" />
       </div>
     );
   }
@@ -139,7 +131,7 @@ export default function DomainsPage() {
   if (error) {
     return (
       <div className="text-center py-12">
-        <FiAlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+        <FiMail className="w-12 h-12 text-red-500 mx-auto mb-4" />
         <h3 className="text-lg font-semibold text-foreground mb-2">Error Loading Domains</h3>
         <p className="text-muted-foreground mb-4">{error}</p>
         <button
@@ -170,7 +162,7 @@ export default function DomainsPage() {
           onClick={() => setShowAddModal(true)}
           className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2"
         >
-          <FiPlus className="w-4 h-4" />
+          <FiHome className="w-4 h-4" />
           Add Domain
         </button>
       </div>
@@ -189,7 +181,7 @@ export default function DomainsPage() {
               <p className="text-3xl font-bold text-foreground">{domains.length}</p>
             </div>
             <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-              <FiGlobe className="w-6 h-6 text-white" />
+              <FiHome className="w-6 h-6 text-white" />
             </div>
           </div>
         </motion.div>
@@ -206,7 +198,7 @@ export default function DomainsPage() {
               <p className="text-3xl font-bold text-foreground">{verifiedCount}</p>
             </div>
             <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-              <FiCheckCircle className="w-6 h-6 text-white" />
+              <FiCheck className="w-6 h-6 text-white" />
             </div>
           </div>
         </motion.div>
@@ -223,7 +215,7 @@ export default function DomainsPage() {
               <p className="text-3xl font-bold text-foreground">{pendingCount}</p>
             </div>
             <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
-              <FiClock className="w-6 h-6 text-white" />
+              <FiHome className="w-6 h-6 text-white" />
             </div>
           </div>
         </motion.div>
@@ -240,7 +232,7 @@ export default function DomainsPage() {
               <p className="text-3xl font-bold text-foreground">{failedCount}</p>
             </div>
             <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
-              <FiAlertTriangle className="w-6 h-6 text-white" />
+              <FiMail className="w-6 h-6 text-white" />
             </div>
           </div>
         </motion.div>
@@ -259,7 +251,7 @@ export default function DomainsPage() {
         
         {domains.length === 0 ? (
           <div className="p-12 text-center">
-            <FiGlobe className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <FiHome className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-foreground mb-2">No domains yet</h3>
             <p className="text-muted-foreground mb-6">
               Add your first domain to get started with email infrastructure.
@@ -268,7 +260,7 @@ export default function DomainsPage() {
               onClick={() => setShowAddModal(true)}
               className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2 mx-auto"
             >
-              <FiPlus className="w-4 h-4" />
+              <FiUsers className="w-4 h-4" />
               Add Domain
             </button>
           </div>
@@ -289,13 +281,13 @@ export default function DomainsPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
-                        <FiGlobe className="w-6 h-6 text-muted-foreground" />
+                        <FiHome className="w-6 h-6 text-muted-foreground" />
                       </div>
                       <div>
                         <div className="flex items-center space-x-2">
                           <h3 className="font-semibold text-foreground text-lg">{domain.domain}</h3>
                           {domain.isProvided && (
-                            <span className="text-xs bg-blue-100 dark:bg-blue-900/20 text-blue-600 px-2 py-1 rounded">
+                            <span className="text-xs bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-2 py-1 rounded">
                               Provided
                             </span>
                           )}
@@ -320,16 +312,16 @@ export default function DomainsPage() {
                         onClick={() => fetchDomains()}
                         title="Refresh status"
                       >
-                        <FiRefreshCw className="w-4 h-4" />
+                        <FiCheck className="w-4 h-4" />
                       </button>
                       <button className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
-                        <FiSettings className="w-4 h-4" />
+                        <FiHome className="w-4 h-4" />
                       </button>
                       <button 
                         className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                         onClick={() => setSelectedDomain(selectedDomain === domain.id ? null : domain.id)}
                       >
-                        <FiMoreVertical className="w-4 h-4" />
+                        <FiUsers className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
@@ -374,15 +366,15 @@ export default function DomainsPage() {
                           <h4 className="font-medium text-foreground mb-3">Quick Actions</h4>
                           <div className="space-y-2">
                             <button className="w-full flex items-center space-x-2 p-2 text-left hover:bg-muted rounded border border-border transition-colors">
-                              <FiCopy className="w-4 h-4 text-muted-foreground" />
+                              <FiMail className="w-4 h-4 text-muted-foreground" />
                               <span className="text-sm text-foreground">Copy Domain</span>
                             </button>
                             <button className="w-full flex items-center space-x-2 p-2 text-left hover:bg-muted rounded border border-border transition-colors">
-                              <FiExternalLink className="w-4 h-4 text-muted-foreground" />
+                              <FiUsers className="w-4 h-4 text-muted-foreground" />
                               <span className="text-sm text-foreground">View Setup Guide</span>
                             </button>
                             <button className="w-full flex items-center space-x-2 p-2 text-left hover:bg-red-50 dark:hover:bg-red-900/20 rounded border border-border transition-colors text-red-600">
-                              <FiTrash2 className="w-4 h-4" />
+                              <FiHome className="w-4 h-4" />
                               <span className="text-sm">Remove Domain</span>
                             </button>
                           </div>
@@ -436,7 +428,7 @@ export default function DomainsPage() {
                   disabled={addingDomain || !newDomain.trim()}
                   className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
-                  {addingDomain && <FiLoader className="w-4 h-4 animate-spin" />}
+                  {addingDomain && <FiCheck className="w-4 h-4 animate-spin" />}
                   Add Domain
                 </button>
               </div>

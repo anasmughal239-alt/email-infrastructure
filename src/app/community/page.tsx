@@ -2,28 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { 
+  FiMail, 
   FiUsers, 
-  FiMessageSquare,
-  FiCalendar,
-  FiCode,
-  FiStar,
-  FiTrendingUp,
-  FiHeart,
-  FiGithub,
-  FiTwitter,
-  FiLinkedin,
-  FiSlack,
-  FiDiscord,
-  FiExternalLink,
-  FiArrowRight,
-  FiClock,
-  FiMapPin,
-  FiMic,
-  FiVideo,
-  FiBookOpen,
-  FiAward,
-  FiZap,
-  FiGlobe
+  FiHome, 
+  FiCheck
 } from 'react-icons/fi'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -33,9 +15,9 @@ export default function CommunityPage() {
 
   const stats = [
     { label: 'Community Members', value: '25,000+', icon: FiUsers },
-    { label: 'Monthly Discussions', value: '1,200+', icon: FiMessageSquare },
-    { label: 'Code Contributions', value: '500+', icon: FiCode },
-    { label: 'Events This Year', value: '48', icon: FiCalendar }
+    { label: 'Monthly Discussions', value: '1,200+', icon: FiMail },
+    { label: 'Code Contributions', value: '500+', icon: FiCheck },
+    { label: 'Events This Year', value: '48', icon: FiHome }
   ]
 
   const forumCategories = [
@@ -45,7 +27,7 @@ export default function CommunityPage() {
       posts: 1247,
       members: 8934,
       color: 'blue',
-      icon: FiMessageSquare
+      icon: FiMail
     },
     {
       title: 'API & Development',
@@ -53,7 +35,7 @@ export default function CommunityPage() {
       posts: 892,
       members: 5621,
       color: 'green',
-      icon: FiCode
+      icon: FiCheck
     },
     {
       title: 'Deliverability',
@@ -61,7 +43,7 @@ export default function CommunityPage() {
       posts: 634,
       members: 4312,
       color: 'purple',
-      icon: FiTrendingUp
+      icon: FiMail
     },
     {
       title: 'Feature Requests',
@@ -69,7 +51,7 @@ export default function CommunityPage() {
       posts: 423,
       members: 3789,
       color: 'orange',
-      icon: FiStar
+      icon: FiMail
     },
     {
       title: 'Showcase',
@@ -77,7 +59,7 @@ export default function CommunityPage() {
       posts: 298,
       members: 2156,
       color: 'pink',
-      icon: FiHeart
+      icon: FiUsers
     },
     {
       title: 'Announcements',
@@ -85,7 +67,7 @@ export default function CommunityPage() {
       posts: 156,
       members: 12453,
       color: 'indigo',
-      icon: FiZap
+      icon: FiHome
     }
   ]
 
@@ -211,28 +193,28 @@ export default function CommunityPage() {
   const socialChannels = [
     {
       name: 'Discord',
-      icon: FiDiscord,
+      icon: FiMail,
       members: '12.5k',
       description: 'Real-time chat and support',
       color: 'indigo'
     },
     {
       name: 'Slack',
-      icon: FiSlack,
+      icon: FiCheck,
       members: '8.2k',
       description: 'Professional discussions',
       color: 'purple'
     },
     {
       name: 'GitHub',
-      icon: FiGithub,
+      icon: FiUsers,
       members: '15.3k',
       description: 'Code contributions and issues',
       color: 'gray'
     },
     {
       name: 'Twitter',
-      icon: FiTwitter,
+      icon: FiHome,
       members: '25.1k',
       description: 'Updates and announcements',
       color: 'blue'
@@ -314,10 +296,10 @@ export default function CommunityPage() {
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 mb-8 border-b border-gray-200">
           {[
-            { id: 'discussions', label: 'Discussions', icon: FiMessageSquare },
-            { id: 'events', label: 'Events', icon: FiCalendar },
-            { id: 'contributors', label: 'Contributors', icon: FiAward },
-            { id: 'channels', label: 'Social Channels', icon: FiGlobe }
+            { id: 'discussions', label: 'Discussions', icon: FiMail },
+            { id: 'events', label: 'Events', icon: FiHome },
+            { id: 'contributors', label: 'Contributors', icon: FiUsers },
+            { id: 'channels', label: 'Social Channels', icon: FiCheck }
           ].map((tab) => {
             const Icon = tab.icon
             return (
@@ -367,7 +349,7 @@ export default function CommunityPage() {
                             <span>{category.members.toLocaleString()} members</span>
                           </div>
                         </div>
-                        <FiArrowRight className="w-5 h-5 text-gray-400" />
+                        <FiMail className="w-5 h-5 text-gray-400" />
                       </div>
                     </motion.div>
                   )
@@ -436,11 +418,11 @@ export default function CommunityPage() {
                     </div>
                     <div className="text-right text-sm text-gray-500">
                       <div className="flex items-center gap-1 mb-1">
-                        <FiCalendar className="w-4 h-4" />
+                        <FiHome className="w-4 h-4" />
                         {new Date(event.date).toLocaleDateString()}
                       </div>
                       <div className="flex items-center gap-1">
-                        <FiClock className="w-4 h-4" />
+                        <FiCheck className="w-4 h-4" />
                         {event.time}
                       </div>
                     </div>
@@ -516,7 +498,7 @@ export default function CommunityPage() {
                       </div>
                       <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
                         Join
-                        <FiExternalLink className="w-4 h-4" />
+                        <FiUsers className="w-4 h-4" />
                       </button>
                     </div>
                   </motion.div>

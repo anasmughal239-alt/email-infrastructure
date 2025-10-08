@@ -2,21 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { 
-  FiUser, 
-  FiKey, 
   FiUsers, 
-  FiSave, 
-  FiCopy, 
-  FiRefreshCw, 
-  FiEye, 
-  FiEyeOff,
-  FiPlus,
-  FiTrash2,
-  FiEdit3,
   FiMail,
-  FiPhone,
-  FiMapPin,
-  FiBuilding
+  FiHome,
+  FiCheck
 } from 'react-icons/fi'
 import { useState } from 'react'
 
@@ -25,8 +14,8 @@ export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState('profile')
 
   const tabs = [
-    { id: 'profile', label: 'Profile', icon: FiUser },
-    { id: 'api', label: 'API Keys', icon: FiKey },
+    { id: 'profile', label: 'Profile', icon: FiHome },
+    { id: 'api', label: 'API Keys', icon: FiCheck },
     { id: 'team', label: 'Team', icon: FiUsers }
   ]
 
@@ -127,7 +116,7 @@ export default function SettingsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <FiUser className="inline w-4 h-4 mr-1" />
+                    <FiHome className="inline w-4 h-4 mr-1" />
                     Full Name
                   </label>
                   <input
@@ -151,7 +140,7 @@ export default function SettingsPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <FiPhone className="inline w-4 h-4 mr-1" />
+                    <FiUsers className="inline w-4 h-4 mr-1" />
                     Phone Number
                   </label>
                   <input
@@ -163,7 +152,7 @@ export default function SettingsPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <FiBuilding className="inline w-4 h-4 mr-1" />
+                    <FiHome className="inline w-4 h-4 mr-1" />
                     Company
                   </label>
                   <input
@@ -175,7 +164,7 @@ export default function SettingsPage() {
 
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <FiMapPin className="inline w-4 h-4 mr-1" />
+                    <FiCheck className="inline w-4 h-4 mr-1" />
                     Address
                   </label>
                   <textarea
@@ -188,7 +177,7 @@ export default function SettingsPage() {
 
               <div className="mt-6 flex justify-end">
                 <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center gap-2">
-                  <FiSave className="w-4 h-4" />
+                  <FiCheck className="w-4 h-4" />
                   Save Changes
                 </button>
               </div>
@@ -208,7 +197,7 @@ export default function SettingsPage() {
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold text-gray-900">API Keys</h2>
                 <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center gap-2">
-                  <FiPlus className="w-4 h-4" />
+                  <FiCheck className="w-4 h-4" />
                   Create New Key
                 </button>
               </div>
@@ -223,10 +212,10 @@ export default function SettingsPage() {
                       </div>
                       <div className="flex gap-2">
                         <button className="text-gray-400 hover:text-gray-600">
-                          <FiEdit3 className="w-4 h-4" />
+                          <FiMail className="w-4 h-4" />
                         </button>
                         <button className="text-red-400 hover:text-red-600">
-                          <FiTrash2 className="w-4 h-4" />
+                          <FiUsers className="w-4 h-4" />
                         </button>
                       </div>
                     </div>
@@ -239,13 +228,13 @@ export default function SettingsPage() {
                         onClick={() => setShowApiKey(!showApiKey)}
                         className="p-2 text-gray-400 hover:text-gray-600"
                       >
-                        {showApiKey ? <FiEyeOff className="w-4 h-4" /> : <FiEye className="w-4 h-4" />}
+                        {showApiKey ? <FiHome className="w-4 h-4" /> : <FiCheck className="w-4 h-4" />}
                       </button>
                       <button
                         onClick={() => copyToClipboard(apiKey.key)}
                         className="p-2 text-gray-400 hover:text-gray-600"
                       >
-                        <FiCopy className="w-4 h-4" />
+                        <FiMail className="w-4 h-4" />
                       </button>
                     </div>
 
@@ -281,7 +270,7 @@ export default function SettingsPage() {
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold text-gray-900">Team Members</h2>
                 <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center gap-2">
-                  <FiPlus className="w-4 h-4" />
+                  <FiCheck className="w-4 h-4" />
                   Invite Member
                 </button>
               </div>
@@ -313,11 +302,11 @@ export default function SettingsPage() {
                       
                       <div className="flex gap-2">
                         <button className="text-gray-400 hover:text-gray-600">
-                          <FiEdit3 className="w-4 h-4" />
+                          <FiMail className="w-4 h-4" />
                         </button>
                         {member.role !== 'Admin' && (
                           <button className="text-red-400 hover:text-red-600">
-                            <FiTrash2 className="w-4 h-4" />
+                            <FiUsers className="w-4 h-4" />
                           </button>
                         )}
                       </div>
@@ -361,7 +350,7 @@ export default function SettingsPage() {
 
                 <div className="flex justify-end">
                   <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center gap-2">
-                    <FiSave className="w-4 h-4" />
+                    <FiCheck className="w-4 h-4" />
                     Save Changes
                   </button>
                 </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiCheck, FiChevronDown, FiChevronUp, FiMail, FiGlobe, FiClock } from 'react-icons/fi';
+import { FiCheck, FiChevronDown, FiChevronUp, FiClock, FiHome, FiMail } from 'react-icons/fi';
 import { useState } from 'react';
 
 // Provider types
@@ -114,7 +114,7 @@ const statsData = [
     description: 'Pre-warmed and ready'
   },
   {
-    icon: FiGlobe,
+    icon: FiHome,
     label: 'Domains Managed',
     value: '10,000+',
     description: 'Across all providers'

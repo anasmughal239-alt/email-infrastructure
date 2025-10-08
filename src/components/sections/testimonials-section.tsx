@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiStar, FiUsers } from 'react-icons/fi';
+import { FiMail, FiUsers } from 'react-icons/fi';
 
 const testimonials = [
   {
@@ -62,8 +62,8 @@ export function TestimonialsSection(): JSX.Element {
               className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow"
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
-                  <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                  <span className="text-blue-600 font-semibold">
                     {testimonial.avatar}
                   </span>
                 </div>
@@ -79,7 +79,7 @@ export function TestimonialsSection(): JSX.Element {
 
               <div className="flex mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <FiStar
+                  <FiMail
                     key={i}
                     className="w-4 h-4 text-yellow-400 fill-current"
                   />

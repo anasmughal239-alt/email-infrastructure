@@ -2,25 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { 
-  FiInfo,
-  FiSettings,
-  FiShield,
-  FiEye,
-  FiClock,
-  FiGlobe,
-  FiUser,
-  FiBarChart,
-  FiCheckCircle,
-  FiX,
-  FiToggleLeft,
-  FiToggleRight,
-  FiRefreshCw,
-  FiDownload,
-  FiExternalLink,
-  FiAlertCircle,
-  FiHelpCircle,
   FiMail,
-  FiPhone
+  FiUsers,
+  FiHome,
+  FiCheck
 } from 'react-icons/fi'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -36,7 +21,7 @@ export default function CookiePolicyPage() {
   const cookieTypes = [
     {
       type: 'Essential Cookies',
-      icon: FiShield,
+      icon: FiCheck,
       required: true,
       description: 'These cookies are necessary for the website to function and cannot be switched off.',
       purpose: 'Authentication, security, and basic website functionality',
@@ -46,7 +31,7 @@ export default function CookiePolicyPage() {
     },
     {
       type: 'Analytics Cookies',
-      icon: FiBarChart,
+      icon: FiMail,
       required: false,
       description: 'These cookies help us understand how visitors interact with our website.',
       purpose: 'Website performance analysis and improvement',
@@ -56,7 +41,7 @@ export default function CookiePolicyPage() {
     },
     {
       type: 'Marketing Cookies',
-      icon: FiUser,
+      icon: FiUsers,
       required: false,
       description: 'These cookies are used to deliver personalized advertisements and track campaign effectiveness.',
       purpose: 'Targeted advertising and marketing campaign measurement',
@@ -66,7 +51,7 @@ export default function CookiePolicyPage() {
     },
     {
       type: 'Functional Cookies',
-      icon: FiSettings,
+      icon: FiHome,
       required: false,
       description: 'These cookies enable enhanced functionality and personalization.',
       purpose: 'Enhanced user experience and personalized features',
@@ -185,7 +170,7 @@ export default function CookiePolicyPage() {
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <FiInfo className="w-20 h-20 mx-auto mb-6 opacity-90" />
+            <FiMail className="w-20 h-20 mx-auto mb-6 opacity-90" />
             <h1 className="text-5xl font-bold mb-6">
               Cookie Policy
             </h1>
@@ -211,7 +196,7 @@ export default function CookiePolicyPage() {
         >
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="flex items-center gap-3 mb-6">
-              <FiSettings className="w-6 h-6 text-blue-600" />
+              <FiHome className="w-6 h-6 text-blue-600" />
               <h2 className="text-2xl font-bold text-gray-900">Cookie Preferences</h2>
             </div>
             
@@ -249,9 +234,9 @@ export default function CookiePolicyPage() {
                       className={`flex items-center ${cookie.required ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                     >
                       {isEnabled ? (
-                        <FiToggleRight className="w-8 h-8 text-blue-600" />
+                        <FiCheck className="w-8 h-8 text-blue-600" />
                       ) : (
-                        <FiToggleLeft className="w-8 h-8 text-gray-400" />
+                        <FiUsers className="w-8 h-8 text-gray-400" />
                       )}
                     </button>
                   </div>
@@ -464,11 +449,11 @@ export default function CookiePolicyPage() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm"
                   >
-                    <FiExternalLink className="w-4 h-4" />
+                    <FiMail className="w-4 h-4" />
                     Privacy Policy
                   </a>
                   <div className="flex items-center gap-2 text-gray-600 text-sm">
-                    <FiSettings className="w-4 h-4" />
+                    <FiHome className="w-4 h-4" />
                     Opt-out: {service.optOut}
                   </div>
                 </div>
@@ -497,25 +482,25 @@ export default function CookiePolicyPage() {
                 <ul className="space-y-2 text-sm">
                   <li>
                     <a href="#" className="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiMail className="w-4 h-4" />
                       Chrome Cookie Settings
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiMail className="w-4 h-4" />
                       Firefox Cookie Settings
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiMail className="w-4 h-4" />
                       Safari Cookie Settings
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiMail className="w-4 h-4" />
                       Edge Cookie Settings
                     </a>
                   </li>
@@ -529,25 +514,25 @@ export default function CookiePolicyPage() {
                 <ul className="space-y-2 text-sm">
                   <li>
                     <a href="#" className="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiCheck className="w-4 h-4" />
                       Google Analytics Opt-out
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiCheck className="w-4 h-4" />
                       Digital Advertising Alliance
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiCheck className="w-4 h-4" />
                       Network Advertising Initiative
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiCheck className="w-4 h-4" />
                       European Interactive Digital Advertising Alliance
                     </a>
                   </li>
@@ -565,7 +550,7 @@ export default function CookiePolicyPage() {
           viewport={{ once: true }}
           className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white"
         >
-          <FiHelpCircle className="w-16 h-16 mx-auto mb-4 opacity-90" />
+          <FiUsers className="w-16 h-16 mx-auto mb-4 opacity-90" />
           <h2 className="text-3xl font-bold mb-4">Questions About Our Cookie Policy?</h2>
           <p className="text-xl mb-6 opacity-90">
             If you have any questions about our use of cookies or this policy, please don't hesitate to contact us.
@@ -582,7 +567,7 @@ export default function CookiePolicyPage() {
               href="/contact" 
               className="border border-white text-white px-6 py-3 rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors font-medium flex items-center gap-2 justify-center"
             >
-              <FiPhone className="w-4 h-4" />
+              <FiHome className="w-4 h-4" />
               Contact Support
             </Link>
           </div>

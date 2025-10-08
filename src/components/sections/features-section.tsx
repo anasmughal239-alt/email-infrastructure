@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiCode, FiDatabase, FiGlobe, FiLock, FiSettings, FiUsers } from "react-icons/fi";
+import { FiMail, FiUsers, FiHome, FiCheck } from "react-icons/fi";
 
 const features = [
   {
-    icon: <FiCode size={24} />,
+    icon: <FiMail size={24} />,
     name: "Modern Stack",
     description: "Built with Next.js, TypeScript, and TailwindCSS for modern web development.",
   },
@@ -15,22 +15,22 @@ const features = [
     description: "Complete user authentication and profile management system.",
   },
   {
-    icon: <FiDatabase size={24} />,
+    icon: <FiCheck size={24} />,
     name: "Data Storage",
     description: "Secure and scalable data storage solutions for your application.",
   },
   {
-    icon: <FiGlobe size={24} />,
+    icon: <FiHome size={24} />,
     name: "Global CDN",
     description: "Lightning-fast content delivery network for global reach.",
   },
   {
-    icon: <FiLock size={24} />,
+    icon: <FiMail size={24} />,
     name: "Security",
     description: "Enterprise-grade security with encryption and compliance.",
   },
   {
-    icon: <FiSettings size={24} />,
+    icon: <FiUsers size={24} />,
     name: "API Integration",
     description: "Easy integration with third-party services and APIs.",
   },

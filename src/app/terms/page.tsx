@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FiFileText, FiShield, FiUsers, FiMail, FiClock, FiAlertTriangle } from 'react-icons/fi'
+import { FiAlertTriangle, FiClock, FiFileText, FiMail, FiShield, FiUsers } from 'react-icons/fi';
 
 export default function TermsPage() {
   const sections = [

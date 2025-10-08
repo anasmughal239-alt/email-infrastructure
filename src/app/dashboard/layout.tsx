@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FiHome, 
   FiMail, 
-  FiGlobe, 
   FiCreditCard, 
   FiSettings, 
   FiUser, 
@@ -15,8 +14,7 @@ import {
   FiX, 
   FiLogOut,
   FiChevronDown,
-  FiBell,
-  FiTrendingUp
+  FiBell
 } from 'react-icons/fi';
 import { ThemeToggle } from '@/components/theme-toggle';
 
@@ -33,7 +31,7 @@ const sidebarItems = [
   {
     name: 'Domains',
     href: '/dashboard/domains',
-    icon: FiGlobe,
+    icon: FiHome,
   },
   {
     name: 'Mailboxes',
@@ -43,7 +41,7 @@ const sidebarItems = [
   {
     name: 'Deliverability',
     href: '/dashboard/deliverability',
-    icon: FiTrendingUp,
+    icon: FiMail,
   },
   {
     name: 'Billing',

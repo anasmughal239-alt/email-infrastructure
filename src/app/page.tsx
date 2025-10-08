@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FiSettings, FiMail, FiBarChart, FiLink, FiCheck, FiArrowRight, FiStar, FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiArrowRight, FiCheck, FiChevronDown, FiChevronUp, FiLink, FiMail, FiSettings } from 'react-icons/fi';
 import { useState } from 'react';
 
 // Hero Section Component
@@ -119,7 +119,7 @@ const FeaturesGrid = () => {
       illustration: '📧'
     },
     {
-      icon: FiBarChart,
+      icon: FiMail,
       title: 'Deliverability Monitoring',
       description: 'Real-time insights into sender reputation and email performance.',
       illustration: '📊'
@@ -393,7 +393,7 @@ const TestimonialsCarousel = () => {
           >
             <div className="flex justify-center mb-4">
               {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                <FiStar key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                <FiMail key={i} className="h-5 w-5 text-yellow-400 fill-current" />
               ))}
             </div>
             <blockquote className="text-lg md:text-xl mb-6 italic">

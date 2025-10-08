@@ -3,21 +3,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  FiCreditCard, 
-  FiDownload, 
-  FiCheck, 
-  FiX, 
-  FiCalendar, 
-  FiDollarSign,
-  FiUsers,
   FiMail,
-  FiTrendingUp,
-  FiShield,
-  FiZap,
-  FiStar,
-  FiArrowRight,
-  FiFileText,
-  FiExternalLink
+  FiUsers,
+  FiHome,
+  FiCheck
 } from 'react-icons/fi';
 
 const currentPlan = {
@@ -161,7 +150,7 @@ export default function BillingPage() {
           onClick={() => setShowUpgradeModal(true)}
           className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2"
         >
-          <FiTrendingUp className="w-4 h-4" />
+          <FiMail className="w-4 h-4" />
           Upgrade Plan
         </button>
       </div>
@@ -181,7 +170,7 @@ export default function BillingPage() {
               <p className="text-muted-foreground">Your active subscription</p>
             </div>
             <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-              <FiCreditCard className="w-6 h-6 text-primary-foreground" />
+              <FiUsers className="w-6 h-6 text-primary-foreground" />
             </div>
           </div>
 
@@ -195,7 +184,7 @@ export default function BillingPage() {
             </div>
 
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <FiCalendar className="w-4 h-4" />
+              <FiHome className="w-4 h-4" />
               <span>Next billing: {currentPlan.nextBillingDate}</span>
             </div>
 
@@ -226,7 +215,7 @@ export default function BillingPage() {
               <p className="text-muted-foreground">Current month usage</p>
             </div>
             <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-              <FiTrendingUp className="w-6 h-6 text-white" />
+              <FiMail className="w-6 h-6 text-white" />
             </div>
           </div>
 
@@ -403,7 +392,7 @@ export default function BillingPage() {
               <p className="text-muted-foreground">Download and view your past invoices</p>
             </div>
             <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
-              <FiFileText className="w-6 h-6 text-white" />
+              <FiMail className="w-6 h-6 text-white" />
             </div>
           </div>
         </div>
@@ -420,7 +409,7 @@ export default function BillingPage() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
-                    <FiFileText className="w-5 h-5 text-muted-foreground" />
+                    <FiMail className="w-5 h-5 text-muted-foreground" />
                   </div>
                   <div>
                     <h3 className="font-medium text-foreground">{invoice.id}</h3>
@@ -444,10 +433,10 @@ export default function BillingPage() {
                   </div>
                   
                   <button className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
-                    <FiDownload className="w-4 h-4" />
+                    <FiCheck className="w-4 h-4" />
                   </button>
                   <button className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
-                    <FiExternalLink className="w-4 h-4" />
+                    <FiHome className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -496,7 +485,7 @@ export default function BillingPage() {
                 className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2"
               >
                 Contact Sales
-                <FiArrowRight className="w-4 h-4" />
+                <FiUsers className="w-4 h-4" />
               </button>
             </div>
           </motion.div>

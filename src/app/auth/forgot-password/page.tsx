@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FiMail, FiArrowRight, FiArrowLeft, FiCheck } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiCheck, FiMail } from 'react-icons/fi';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');

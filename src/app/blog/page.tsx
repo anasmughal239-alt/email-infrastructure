@@ -2,18 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { 
-  FiSearch, 
-  FiCalendar, 
-  FiUser, 
-  FiClock, 
-  FiArrowRight,
-  FiTrendingUp,
-  FiCode,
-  FiShield,
-  FiZap,
-  FiMail,
-  FiSettings,
-  FiBookOpen
+  FiMail, 
+  FiUsers, 
+  FiHome, 
+  FiCheck
 } from 'react-icons/fi'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -23,11 +15,11 @@ export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
 
   const categories = [
-    { id: 'all', name: 'All Posts', icon: FiBookOpen },
-    { id: 'tutorials', name: 'Tutorials', icon: FiCode },
-    { id: 'best-practices', name: 'Best Practices', icon: FiTrendingUp },
-    { id: 'security', name: 'Security', icon: FiShield },
-    { id: 'product-updates', name: 'Product Updates', icon: FiZap },
+    { id: 'all', name: 'All Posts', icon: FiHome },
+    { id: 'tutorials', name: 'Tutorials', icon: FiCheck },
+    { id: 'best-practices', name: 'Best Practices', icon: FiMail },
+    { id: 'security', name: 'Security', icon: FiUsers },
+    { id: 'product-updates', name: 'Product Updates', icon: FiMail },
     { id: 'email-marketing', name: 'Email Marketing', icon: FiMail }
   ]
 
@@ -157,7 +149,7 @@ export default function BlogPage() {
             {/* Search and Filter */}
             <div className="max-w-2xl mx-auto">
               <div className="relative mb-6">
-                <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
                   placeholder="Search articles..."
@@ -224,15 +216,15 @@ export default function BlogPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4 text-sm text-gray-500">
                     <div className="flex items-center gap-1">
-                      <FiUser className="w-4 h-4" />
+                      <FiUsers className="w-4 h-4" />
                       {featuredPost.author}
                     </div>
                     <div className="flex items-center gap-1">
-                      <FiCalendar className="w-4 h-4" />
+                      <FiHome className="w-4 h-4" />
                       {formatDate(featuredPost.publishDate)}
                     </div>
                     <div className="flex items-center gap-1">
-                      <FiClock className="w-4 h-4" />
+                      <FiCheck className="w-4 h-4" />
                       {featuredPost.readTime}
                     </div>
                   </div>
@@ -241,7 +233,7 @@ export default function BlogPage() {
                     className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
                   >
                     Read More
-                    <FiArrowRight className="w-4 h-4" />
+                    <FiMail className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
@@ -260,7 +252,7 @@ export default function BlogPage() {
               className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
             >
               <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                <FiBookOpen className="w-12 h-12 text-gray-400" />
+                <FiHome className="w-12 h-12 text-gray-400" />
               </div>
               
               <div className="p-6">
@@ -291,16 +283,16 @@ export default function BlogPage() {
                 
                 <div className="flex items-center justify-between text-sm text-gray-500">
                   <div className="flex items-center gap-1">
-                    <FiUser className="w-4 h-4" />
+                    <FiUsers className="w-4 h-4" />
                     {post.author}
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1">
-                      <FiCalendar className="w-4 h-4" />
+                      <FiHome className="w-4 h-4" />
                       {formatDate(post.publishDate)}
                     </div>
                     <div className="flex items-center gap-1">
-                      <FiClock className="w-4 h-4" />
+                      <FiCheck className="w-4 h-4" />
                       {post.readTime}
                     </div>
                   </div>
@@ -311,7 +303,7 @@ export default function BlogPage() {
                   className="mt-4 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm"
                 >
                   Read Article
-                  <FiArrowRight className="w-4 h-4" />
+                  <FiMail className="w-4 h-4" />
                 </Link>
               </div>
             </motion.article>
@@ -325,7 +317,7 @@ export default function BlogPage() {
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <FiSearch className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+            <FiMail className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No articles found</h3>
             <p className="text-gray-600 mb-6">
               Try adjusting your search terms or browse different categories.

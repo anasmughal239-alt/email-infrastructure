@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { FiEye, FiEyeOff, FiLock, FiArrowRight, FiCheck, FiAlertCircle } from 'react-icons/fi';
+import { FiAlertCircle, FiArrowRight, FiCheck, FiEye, FiEyeOff, FiLock } from 'react-icons/fi';
 
 export default function ResetPasswordPage() {
   const searchParams = useSearchParams();

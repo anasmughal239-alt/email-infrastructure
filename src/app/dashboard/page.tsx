@@ -6,9 +6,7 @@ import { useEffect } from 'react'
 import { motion } from 'framer-motion';
 import { 
   FiMail, 
-  FiGlobe, 
-  FiTrendingUp, 
-  FiActivity,
+  FiHome, 
   FiArrowUp,
   FiArrowDown,
   FiMoreVertical,
@@ -25,7 +23,7 @@ const stats = [
     value: '5',
     change: '+2 this month',
     changeType: 'increase',
-    icon: FiGlobe,
+    icon: FiHome,
     color: 'bg-blue-500',
   },
   {
@@ -41,7 +39,7 @@ const stats = [
     value: '87%',
     change: '+3% this week',
     changeType: 'increase',
-    icon: FiTrendingUp,
+    icon: FiMail,
     color: 'bg-purple-500',
   },
   {
@@ -49,7 +47,7 @@ const stats = [
     value: '1,247',
     change: '+12% vs yesterday',
     changeType: 'increase',
-    icon: FiActivity,
+    icon: FiMail,
     color: 'bg-orange-500',
   },
 ];
@@ -172,7 +170,7 @@ export default function DashboardPage() {
               <div key={domain.name} className="flex items-center justify-between p-3 rounded-lg border border-border">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
-                    <FiGlobe className="w-5 h-5 text-muted-foreground" />
+                    <FiHome className="w-5 h-5 text-muted-foreground" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground">{domain.name}</p>
@@ -265,15 +263,13 @@ export default function DashboardPage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center">
-            <div className="w-20 h-20 mx-auto bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mb-3">
-              <FiTrendingUp className="w-8 h-8 text-green-600 dark:text-green-400" />
-            </div>
+            <FiMail className="w-20 h-20 mx-auto text-gray-600 dark:text-gray-400 mb-3" />
             <p className="text-2xl font-bold text-foreground">87%</p>
             <p className="text-sm text-muted-foreground">Overall Score</p>
           </div>
           <div className="text-center">
-            <div className="w-20 h-20 mx-auto bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mb-3">
-              <FiMail className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+            <div className="w-20 h-20 mx-auto bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mb-3">
+              <FiMail className="w-8 h-8 text-green-600 dark:text-green-400" />
             </div>
             <p className="text-2xl font-bold text-foreground">82%</p>
             <p className="text-sm text-muted-foreground">Inbox Placement</p>

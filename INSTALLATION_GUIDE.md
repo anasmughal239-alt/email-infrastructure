@@ -1,6 +1,6 @@
-# Installation Guide for Docker-Based Email Infrastructure
+# Installation Guide for Native Email Infrastructure
 
-This guide will help you install all necessary dependencies to run the Email Infrastructure application using Docker.
+This guide will help you install all necessary dependencies to run the Email Infrastructure application natively on your host system.
 
 ## 📋 Prerequisites
 
@@ -12,281 +12,314 @@ This guide will help you install all necessary dependencies to run the Email Inf
 - **4GB RAM** minimum (8GB recommended)
 - **20GB free disk space**
 
-## 🐳 Docker Installation
+## 🟢 Node.js Installation
 
 ### Windows
 
-#### Option 1: Docker Desktop (Recommended)
+#### Option 1: Official Installer (Recommended)
 
-1. **Download Docker Desktop**
-   - Visit: https://www.docker.com/products/docker-desktop/
-   - Download "Docker Desktop for Windows"
+1. **Download Node.js**
+   - Visit: https://nodejs.org/
+   - Download the LTS version (recommended)
 
-2. **Install Docker Desktop**
-   - Run the installer as Administrator
+2. **Install Node.js**
+   - Run the installer
    - Follow the installation wizard
-   - Enable WSL2 integration when prompted
+   - Ensure "Add to PATH" is checked
 
-3. **Enable WSL2 (if not already enabled)**
+3. **Verify Installation**
    ```powershell
-   # Run as Administrator
-   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-   
-   # Restart your computer
-   # Then set WSL2 as default
-   wsl --set-default-version 2
+   # Open PowerShell and run:
+   node --version
+   npm --version
    ```
 
-4. **Verify Installation**
-   ```powershell
-   docker --version
-   docker-compose --version
-   ```
+#### Option 2: Package Manager Installation
 
-#### Option 2: Docker Engine (Advanced Users)
+Using Chocolatey:
+```powershell
+# Install Node.js
+choco install nodejs
+```
 
-1. **Install using Chocolatey**
-   ```powershell
-   # Install Chocolatey first (if not installed)
-   Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-   
-   # Install Docker
-   choco install docker-desktop
-   ```
+Using Winget:
+```powershell
+# Install Node.js
+winget install OpenJS.NodeJS
+```
 
 ### macOS
 
-#### Option 1: Docker Desktop (Recommended)
+#### Option 1: Official Installer (Recommended)
 
-1. **Download Docker Desktop**
-   - Visit: https://www.docker.com/products/docker-desktop/
-   - Download "Docker Desktop for Mac"
+1. **Download Node.js**
+   - Visit: https://nodejs.org/
+   - Download the LTS version for macOS
 
-2. **Install Docker Desktop**
-   - Open the downloaded `.dmg` file
-   - Drag Docker to Applications folder
-   - Launch Docker from Applications
+2. **Install Node.js**
+   - Open the downloaded `.pkg` file
+   - Follow the installation wizard
 
 3. **Verify Installation**
    ```bash
-   docker --version
-   docker-compose --version
+   node --version
+   npm --version
    ```
 
-#### Option 2: Using Homebrew
+#### Option 2: Homebrew Installation
 
 ```bash
-# Install Homebrew (if not installed)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Install Node.js
+brew install node
 
-# Install Docker
-brew install --cask docker
-
-# Start Docker Desktop
-open /Applications/Docker.app
+# Verify installation
+node --version
+npm --version
 ```
 
 ### Linux (Ubuntu/Debian)
 
-1. **Update Package Index**
-   ```bash
-   sudo apt-get update
-   ```
+#### Option 1: NodeSource Repository (Recommended)
 
-2. **Install Prerequisites**
-   ```bash
-   sudo apt-get install \
-       ca-certificates \
-       curl \
-       gnupg \
-       lsb-release
-   ```
+```bash
+# Update package index
+sudo apt-get update
 
-3. **Add Docker's Official GPG Key**
-   ```bash
-   sudo mkdir -p /etc/apt/keyrings
-   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-   ```
+# Install curl if not present
+sudo apt-get install -y curl
 
-4. **Set Up Repository**
-   ```bash
-   echo \
-     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-   ```
+# Add NodeSource repository
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 
-5. **Install Docker Engine**
-   ```bash
-   sudo apt-get update
-   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-   ```
+# Install Node.js
+sudo apt-get install -y nodejs
 
-6. **Add User to Docker Group**
-   ```bash
-   sudo usermod -aG docker $USER
-   newgrp docker
-   ```
+# Verify installation
+node --version
+npm --version
+```
 
-7. **Verify Installation**
-   ```bash
-   docker --version
-   docker compose version
-   ```
+#### Option 2: Package Manager
+
+```bash
+# Install Node.js from default repository
+sudo apt-get update
+sudo apt-get install -y nodejs npm
+
+# Verify installation
+node --version
+npm --version
+```
 
 ### Linux (CentOS/RHEL)
 
-1. **Install Prerequisites**
-   ```bash
-   sudo yum install -y yum-utils
-   ```
+#### Option 1: NodeSource Repository (Recommended)
 
-2. **Add Docker Repository**
-   ```bash
-   sudo yum-config-manager \
-       --add-repo \
-       https://download.docker.com/linux/centos/docker-ce.repo
-   ```
+```bash
+# Add NodeSource repository
+curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
 
-3. **Install Docker**
-   ```bash
-   sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-   ```
+# Install Node.js
+sudo yum install -y nodejs
 
-4. **Start Docker Service**
-   ```bash
-   sudo systemctl start docker
-   sudo systemctl enable docker
-   ```
+# Verify installation
+node --version
+npm --version
+```
 
-5. **Add User to Docker Group**
-   ```bash
-   sudo usermod -aG docker $USER
-   newgrp docker
-   ```
+#### Option 2: Package Manager
+
+```bash
+# Install Node.js from EPEL
+sudo yum install -y epel-release
+sudo yum install -y nodejs npm
+
+# Verify installation
+node --version
+npm --version
+```
 
 ## 🔧 Post-Installation Setup
 
-### 1. Verify Docker Installation
+### 1. Verify Node.js Installation
 
 ```bash
-# Check Docker version
-docker --version
+# Check Node.js version (should be 18.x or higher)
+node --version
 
-# Check Docker Compose version
-docker compose version
-# OR (older versions)
-docker-compose --version
+# Check npm version
+npm --version
 
-# Test Docker installation
-docker run hello-world
+# Check npx availability
+npx --version
 ```
 
-### 2. Configure Docker (Optional)
+### 2. Install Global Dependencies (Optional)
 
-#### Increase Memory Allocation (Docker Desktop)
-
-1. Open Docker Desktop
-2. Go to Settings → Resources → Advanced
-3. Increase Memory to at least 4GB (8GB recommended)
-4. Click "Apply & Restart"
-
-#### Configure Docker Daemon (Linux)
-
-Create `/etc/docker/daemon.json`:
-```json
-{
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "10m",
-    "max-file": "3"
-  },
-  "storage-driver": "overlay2"
-}
-```
-
-Restart Docker:
 ```bash
-sudo systemctl restart docker
+# Install useful global packages
+npm install -g pm2          # Process manager for production
+npm install -g prisma       # Database toolkit
+npm install -g typescript   # TypeScript compiler
 ```
 
-## 🚀 Quick Deployment Test
+### 3. Configure npm (Optional)
 
-After installing Docker, test the deployment:
+```bash
+# Set npm registry (if needed)
+npm config set registry https://registry.npmjs.org/
+
+# Configure npm cache location (optional)
+npm config set cache ~/.npm-cache
+
+# View current configuration
+npm config list
+```
+
+### 4. Database Setup
+
+For production deployment, you'll need PostgreSQL and Redis. You can:
+
+#### Option 1: Use Render.com Services (Recommended)
+- PostgreSQL and Redis are configured in `render.yaml`
+- No local setup required
+
+#### Option 2: Local Development Setup
+```bash
+# Install PostgreSQL locally
+# Windows: Download from https://www.postgresql.org/download/windows/
+# macOS: brew install postgresql
+# Linux: sudo apt-get install postgresql postgresql-contrib
+
+# Install Redis locally
+# Windows: Download from https://redis.io/download
+# macOS: brew install redis
+# Linux: sudo apt-get install redis-server
+```
+
+## 🚀 Quick Start
+
+After installing Node.js, test the application:
 
 ### Windows (PowerShell)
 ```powershell
-# Navigate to project directory
-cd "C:\path\to\Email Infra"
+# Clone the repository (if not already done)
+git clone <repository-url>
+cd email-infrastructure
 
-# Test deployment
-.\deploy.ps1 dev
+# Install dependencies
+npm install
+
+# Copy environment template
+Copy-Item .env.example .env
+
+# Generate Prisma client
+npx prisma generate
+
+# Run database migrations (if database is configured)
+npx prisma migrate dev
+
+# Start the development server
+npm run dev
 ```
 
-### Linux/Mac (Bash)
+### macOS/Linux (Bash)
 ```bash
-# Navigate to project directory
-cd /path/to/Email\ Infra
+# Clone the repository (if not already done)
+git clone <repository-url>
+cd email-infrastructure
 
-# Make script executable
-chmod +x deploy.sh
+# Install dependencies
+npm install
 
-# Test deployment
-./deploy.sh dev
+# Copy environment template
+cp .env.example .env
+
+# Generate Prisma client
+npx prisma generate
+
+# Run database migrations (if database is configured)
+npx prisma migrate dev
+
+# Start the development server
+npm run dev
+```
+
+### Verify Installation
+```bash
+# Check if the application is running
+curl http://localhost:3000/api/health
+
+# View application logs in the terminal where npm run dev is running
+
+# Access the application
+# Open browser to: http://localhost:3000
 ```
 
 ## 🔍 Troubleshooting
 
 ### Common Issues
 
-#### 1. Docker Desktop Won't Start (Windows)
+#### 1. Node.js Version Issues
 
-**Solution:**
-```powershell
-# Enable Hyper-V
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-
-# Enable WSL2
-wsl --install
-```
-
-#### 2. Permission Denied (Linux)
+**Problem:** Application requires Node.js 18.x or higher
 
 **Solution:**
 ```bash
-# Add user to docker group
-sudo usermod -aG docker $USER
+# Check current version
+node --version
 
-# Logout and login again, or run:
-newgrp docker
+# Update Node.js to latest LTS
+# Windows: Download from nodejs.org
+# macOS: brew upgrade node
+# Linux: Use NodeSource repository (see installation section)
 ```
 
-#### 3. Docker Compose Command Not Found
-
-**For newer Docker versions, use:**
-```bash
-docker compose  # Instead of docker-compose
-```
-
-**For older versions, install separately:**
-```bash
-# Linux
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-
-# Windows (using pip)
-pip install docker-compose
-```
-
-#### 4. WSL2 Installation Issues (Windows)
+#### 2. npm Permission Issues (Linux/macOS)
 
 **Solution:**
-```powershell
-# Download and install WSL2 kernel update
-# Visit: https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+```bash
+# Option 1: Use a Node version manager (recommended)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+nvm install --lts
+nvm use --lts
 
-# Set WSL2 as default
-wsl --set-default-version 2
+# Option 2: Change npm's default directory
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### 3. Package Installation Failures
+
+**Solution:**
+```bash
+# Clear npm cache
+npm cache clean --force
+
+# Delete node_modules and package-lock.json
+rm -rf node_modules package-lock.json
+
+# Reinstall dependencies
+npm install
+
+# If still failing, try with legacy peer deps
+npm install --legacy-peer-deps
+```
+
+#### 4. Prisma Client Issues
+
+**Solution:**
+```bash
+# Regenerate Prisma client
+npx prisma generate
+
+# Reset database (development only)
+npx prisma migrate reset
+
+# Push schema changes
+npx prisma db push
 ```
 
 #### 5. Port Already in Use
@@ -294,72 +327,117 @@ wsl --set-default-version 2
 **Solution:**
 ```bash
 # Find process using port 3000
-netstat -tulpn | grep :3000
+# Windows
+netstat -ano | findstr :3000
+
+# macOS/Linux
+lsof -i :3000
 
 # Kill process (replace PID)
-kill -9 <PID>
+# Windows
+taskkill /PID <PID> /F
 
-# Or use Docker to stop all containers
-docker stop $(docker ps -q)
+# macOS/Linux
+kill -9 <PID>
+```
+
+#### 6. Environment Variables Not Loading
+
+**Solution:**
+```bash
+# Check if .env file exists
+ls -la .env*
+
+# Verify environment variables are set
+node -e "console.log(process.env.NODE_ENV)"
+
+# Copy from template if missing
+cp .env.example .env
 ```
 
 ### System-Specific Issues
 
 #### macOS Apple Silicon (M1/M2)
 
-Ensure you download the Apple Silicon version of Docker Desktop.
+Some npm packages may need native compilation:
+```bash
+# Install Xcode command line tools
+xcode-select --install
 
-#### Windows Home Edition
+# Use Rosetta if needed for specific packages
+arch -x86_64 npm install
+```
 
-Docker Desktop requires Windows 10/11 Pro, Enterprise, or Education. For Windows Home:
+#### Windows PowerShell Execution Policy
 
-1. Upgrade to Windows Pro, or
-2. Use Docker Toolbox (legacy), or
-3. Use WSL2 with Docker Engine
+If scripts won't run:
+```powershell
+# Check current policy
+Get-ExecutionPolicy
+
+# Set policy to allow scripts
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 
 #### Low Disk Space
 
-Docker images can be large. Clean up regularly:
+Node.js projects can accumulate large dependencies:
 ```bash
-# Remove unused containers, networks, images
-docker system prune -a
+# Clean npm cache
+npm cache clean --force
 
-# Remove unused volumes
-docker volume prune
+# Remove node_modules in all projects
+find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
+
+# Clean global packages (if needed)
+npm list -g --depth=0
 ```
 
 ## 📞 Getting Help
 
 ### Official Documentation
-- **Docker**: https://docs.docker.com/
-- **Docker Compose**: https://docs.docker.com/compose/
-- **Docker Desktop**: https://docs.docker.com/desktop/
+- **Node.js**: https://nodejs.org/docs/
+- **npm**: https://docs.npmjs.com/
+- **Next.js**: https://nextjs.org/docs
+- **Prisma**: https://www.prisma.io/docs
 
 ### Community Support
-- **Docker Community**: https://forums.docker.com/
-- **Stack Overflow**: https://stackoverflow.com/questions/tagged/docker
-- **Reddit**: https://www.reddit.com/r/docker/
+- **Node.js Community**: https://nodejs.org/community/
+- **Stack Overflow**: https://stackoverflow.com/questions/tagged/node.js
+- **Reddit**: https://www.reddit.com/r/node/
 
 ### Verification Checklist
 
 Before proceeding with deployment, ensure:
 
-- [ ] Docker is installed and running
-- [ ] Docker Compose is available
-- [ ] User has Docker permissions (Linux)
-- [ ] At least 4GB RAM allocated to Docker
-- [ ] Ports 3000, 5432, 6379 are available
-- [ ] Internet connection for downloading images
+- [ ] Node.js 18.x or higher is installed
+- [ ] npm is available and working
+- [ ] npx is available for running packages
+- [ ] Git is installed for version control
+- [ ] Ports 3000 is available for the application
+- [ ] Internet connection for downloading packages
+- [ ] Environment variables are configured
 
 ## 🎉 Next Steps
 
-Once Docker is installed and verified:
+Once Node.js is installed and verified:
 
-1. **Read the deployment guide**: `DOCKER_DEPLOYMENT.md`
-2. **Configure environment**: Copy and edit `.env.docker`
-3. **Start deployment**: Run `./deploy.sh dev` or `.\deploy.ps1 dev`
-4. **Access application**: Visit http://localhost:3000
+1. **Clone the repository**: `git clone <repository-url>`
+2. **Install dependencies**: `npm install`
+3. **Configure environment**: Copy and edit `.env.example` to `.env`
+4. **Generate Prisma client**: `npx prisma generate`
+5. **Start development**: Run `npm run dev`
+6. **Access application**: Visit http://localhost:3000
+
+## 🚀 Production Deployment
+
+For production deployment to Render.com:
+
+1. **Configure render.yaml**: Already set up for native Node.js
+2. **Set environment variables**: Configure in Render dashboard
+3. **Deploy**: Push to GitHub and connect to Render
+4. **Monitor**: Check deployment logs and health endpoints
 
 ---
 
-**Need help?** Check the troubleshooting section or refer to the comprehensive deployment documentation in `DOCKER_DEPLOYMENT.md`.
+**Need help?** Check the troubleshooting section above or refer to the Next.js and Prisma documentation for specific issues.

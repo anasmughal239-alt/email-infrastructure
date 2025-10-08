@@ -2,24 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { 
-  FiSearch, 
-  FiBook, 
-  FiMessageCircle,
+  FiCheck, 
   FiMail,
-  FiPhone,
-  FiClock,
-  FiChevronDown,
-  FiChevronRight,
-  FiExternalLink,
-  FiPlay,
-  FiDownload,
-  FiCode,
-  FiSettings,
-  FiShield,
-  FiTrendingUp,
   FiUsers,
-  FiHelpCircle,
-  FiArrowRight
+  FiHome
 } from 'react-icons/fi'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -30,28 +16,28 @@ export default function HelpCenterPage() {
 
   const categories = [
     {
-      icon: FiCode,
+      icon: FiCheck,
       title: 'API Documentation',
       description: 'Complete guides for integrating our email API',
       articles: 12,
       color: 'blue'
     },
     {
-      icon: FiSettings,
+      icon: FiHome,
       title: 'Getting Started',
       description: 'Setup guides and quick start tutorials',
       articles: 8,
       color: 'green'
     },
     {
-      icon: FiShield,
+      icon: FiUsers,
       title: 'Security & Compliance',
       description: 'Security best practices and compliance guides',
       articles: 6,
       color: 'purple'
     },
     {
-      icon: FiTrendingUp,
+      icon: FiMail,
       title: 'Deliverability',
       description: 'Improve your email delivery rates',
       articles: 10,
@@ -143,7 +129,7 @@ export default function HelpCenterPage() {
 
   const supportChannels = [
     {
-      icon: FiMessageCircle,
+      icon: FiUsers,
       title: 'Live Chat',
       description: 'Get instant help from our support team',
       availability: '24/7',
@@ -157,7 +143,7 @@ export default function HelpCenterPage() {
       action: 'Send Email'
     },
     {
-      icon: FiPhone,
+      icon: FiHome,
       title: 'Phone Support',
       description: 'Talk to our experts directly',
       availability: 'Business hours',
@@ -198,7 +184,7 @@ export default function HelpCenterPage() {
             {/* Search Bar */}
             <div className="max-w-2xl mx-auto relative">
               <div className="relative">
-                <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <FiCheck className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
                   placeholder="Search for help articles, guides, or FAQs..."
@@ -238,13 +224,11 @@ export default function HelpCenterPage() {
                   viewport={{ once: true }}
                   className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center hover:shadow-md transition-shadow"
                 >
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-8 h-8 text-blue-600" />
-                  </div>
+                  <Icon className="w-16 h-16 text-gray-600 mx-auto mb-4" />
                   <h3 className="font-semibold text-gray-900 mb-2">{channel.title}</h3>
                   <p className="text-gray-600 text-sm mb-3">{channel.description}</p>
                   <div className="flex items-center justify-center gap-1 text-sm text-gray-500 mb-4">
-                    <FiClock className="w-4 h-4" />
+                    <FiHome className="w-4 h-4" />
                     {channel.availability}
                   </div>
                   <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
@@ -290,7 +274,7 @@ export default function HelpCenterPage() {
                   <p className="text-gray-600 text-sm mb-3">{category.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-500">{category.articles} articles</span>
-                    <FiArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                    <FiMail className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
                   </div>
                 </motion.div>
               )
@@ -333,13 +317,13 @@ export default function HelpCenterPage() {
                         {article.category}
                       </span>
                       <div className="flex items-center gap-1">
-                        <FiClock className="w-4 h-4" />
+                        <FiUsers className="w-4 h-4" />
                         {article.readTime}
                       </div>
                       <span>{article.views} views</span>
                     </div>
                   </div>
-                  <FiChevronRight className="w-5 h-5 text-gray-400" />
+                  <FiCheck className="w-5 h-5 text-gray-400" />
                 </div>
               </motion.div>
             ))}
@@ -376,9 +360,9 @@ export default function HelpCenterPage() {
                   <div className="flex items-center justify-between">
                     <h3 className="font-semibold text-gray-900 pr-4">{faq.question}</h3>
                     {expandedFaq === index ? (
-                      <FiChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                      <FiCheck className="w-5 h-5 text-gray-400 flex-shrink-0" />
                     ) : (
-                      <FiChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                      <FiMail className="w-5 h-5 text-gray-400 flex-shrink-0" />
                     )}
                   </div>
                 </button>
@@ -407,7 +391,7 @@ export default function HelpCenterPage() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
-            <FiBook className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+            <FiCheck className="w-8 h-8 text-blue-600 mx-auto mb-3" />
             <h3 className="font-semibold text-gray-900 mb-2">API Docs</h3>
             <p className="text-sm text-gray-600 mb-4">Complete API reference</p>
             <Link href="/docs" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
@@ -416,7 +400,7 @@ export default function HelpCenterPage() {
           </div>
           
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
-            <FiPlay className="w-8 h-8 text-green-600 mx-auto mb-3" />
+            <FiMail className="w-8 h-8 text-green-600 mx-auto mb-3" />
             <h3 className="font-semibold text-gray-900 mb-2">Video Tutorials</h3>
             <p className="text-sm text-gray-600 mb-4">Step-by-step guides</p>
             <a href="#" className="text-green-600 hover:text-green-700 text-sm font-medium">
@@ -425,7 +409,7 @@ export default function HelpCenterPage() {
           </div>
           
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
-            <FiDownload className="w-8 h-8 text-purple-600 mx-auto mb-3" />
+            <FiHome className="w-8 h-8 text-purple-600 mx-auto mb-3" />
             <h3 className="font-semibold text-gray-900 mb-2">SDKs</h3>
             <p className="text-sm text-gray-600 mb-4">Download our libraries</p>
             <a href="#" className="text-purple-600 hover:text-purple-700 text-sm font-medium">
@@ -451,7 +435,7 @@ export default function HelpCenterPage() {
           viewport={{ once: true }}
           className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white"
         >
-          <FiHelpCircle className="w-16 h-16 mx-auto mb-4 opacity-90" />
+          <FiUsers className="w-16 h-16 mx-auto mb-4 opacity-90" />
           <h2 className="text-3xl font-bold mb-4">Still need help?</h2>
           <p className="text-xl mb-6 opacity-90">
             Can't find what you're looking for? Our support team is here to help.

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { FiPlay, FiMail, FiSettings, FiBarChart, FiCheckCircle, FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiCheckCircle, FiMail, FiPlay, FiSettings } from 'react-icons/fi';
 
 export default function DemoClient() {
   const [activeDemo, setActiveDemo] = useState('setup');
@@ -26,7 +26,7 @@ export default function DemoClient() {
       id: 'analytics',
       title: 'Deliverability Analytics',
       description: 'Track your email performance with real-time insights',
-      icon: FiBarChart,
+      icon: FiMail,
       color: 'purple'
     }
   ];
@@ -194,7 +194,7 @@ export default function DemoClient() {
           {activeDemo === 'analytics' && (
             <div className="card p-8">
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <FiBarChart className="h-6 w-6 text-purple-500" />
+                <FiMail className="h-6 w-6 text-purple-500" />
                 Deliverability Analytics
               </h2>
               <div className="grid md:grid-cols-2 gap-8">

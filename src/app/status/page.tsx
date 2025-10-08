@@ -3,23 +3,9 @@
 import { motion } from 'framer-motion'
 import { 
   FiCheck, 
-  FiAlertTriangle,
-  FiX,
-  FiClock,
-  FiTrendingUp,
-  FiActivity,
-  FiServer,
-  FiGlobe,
   FiMail,
-  FiShield,
-  FiDatabase,
-  FiWifi,
-  FiCalendar,
-  FiExternalLink,
-  FiRefreshCw,
-  FiInfo,
-  FiAlertCircle,
-  FiCheckCircle
+  FiHome,
+  FiUsers
 } from 'react-icons/fi'
 import { useState } from 'react'
 
@@ -193,9 +179,9 @@ export default function StatusPage() {
       case 'operational':
         return <FiCheck className="w-5 h-5 text-green-600" />
       case 'degraded':
-        return <FiAlertTriangle className="w-5 h-5 text-yellow-600" />
+        return <FiUsers className="w-5 h-5 text-yellow-600" />
       case 'outage':
-        return <FiX className="w-5 h-5 text-red-600" />
+        return <FiMail className="w-5 h-5 text-red-600" />
       default:
         return <FiCheck className="w-5 h-5 text-green-600" />
     }
@@ -232,15 +218,15 @@ export default function StatusPage() {
   const getIncidentStatusIcon = (status: string) => {
     switch (status) {
       case 'investigating':
-        return <FiAlertCircle className="w-4 h-4 text-yellow-600" />
+        return <FiUsers className="w-4 h-4 text-yellow-600" />
       case 'resolved':
-        return <FiCheckCircle className="w-4 h-4 text-green-600" />
+        return <FiCheck className="w-4 h-4 text-green-600" />
       case 'monitoring':
-        return <FiActivity className="w-4 h-4 text-blue-600" />
+        return <FiMail className="w-4 h-4 text-blue-600" />
       case 'completed':
-        return <FiCheckCircle className="w-4 h-4 text-green-600" />
+        return <FiCheck className="w-4 h-4 text-green-600" />
       default:
-        return <FiInfo className="w-4 h-4 text-gray-600" />
+        return <FiHome className="w-4 h-4 text-gray-600" />
     }
   }
 
@@ -283,7 +269,7 @@ export default function StatusPage() {
                 <p className="text-gray-600 mt-2">Current status of all Email Infrastructure services</p>
               </div>
               <button className="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-                <FiRefreshCw className="w-4 h-4" />
+                <FiCheck className="w-4 h-4" />
                 Refresh
               </button>
             </div>
@@ -324,7 +310,7 @@ export default function StatusPage() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-sm font-medium text-gray-600">{metric.name}</h3>
-                  <FiTrendingUp className={`w-4 h-4 ${metric.trend === 'up' ? 'text-green-600' : 'text-red-600'}`} />
+                  <FiMail className={`w-4 h-4 ${metric.trend === 'up' ? 'text-green-600' : 'text-red-600'}`} />
                 </div>
                 <div className="text-2xl font-bold text-gray-900 mb-1">{metric.value}</div>
                 <div className="flex items-center gap-2 text-sm">
@@ -475,7 +461,7 @@ export default function StatusPage() {
                           {incident.severity}
                         </span>
                         <div className="flex items-center gap-1">
-                          <FiClock className="w-4 h-4" />
+                          <FiHome className="w-4 h-4" />
                           {formatDate(incident.startTime)}
                           {incident.endTime && ` - ${formatDate(incident.endTime)}`}
                         </div>
@@ -522,7 +508,7 @@ export default function StatusPage() {
           viewport={{ once: true }}
           className="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white"
         >
-          <FiActivity className="w-16 h-16 mx-auto mb-4 opacity-90" />
+          <FiMail className="w-16 h-16 mx-auto mb-4 opacity-90" />
           <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
           <p className="text-xl mb-6 opacity-90">
             Subscribe to status updates and get notified about incidents and maintenance.
@@ -539,11 +525,11 @@ export default function StatusPage() {
           </div>
           <div className="flex items-center justify-center gap-4 mt-6 text-sm opacity-75">
             <a href="#" className="flex items-center gap-1 hover:opacity-100 transition-opacity">
-              <FiExternalLink className="w-4 h-4" />
+              <FiMail className="w-4 h-4" />
               RSS Feed
             </a>
             <a href="#" className="flex items-center gap-1 hover:opacity-100 transition-opacity">
-              <FiCalendar className="w-4 h-4" />
+              <FiUsers className="w-4 h-4" />
               Status Calendar
             </a>
           </div>

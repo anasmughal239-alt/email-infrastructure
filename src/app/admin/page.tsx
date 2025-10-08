@@ -3,7 +3,7 @@
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { FiUsers, FiStar, FiLogOut, FiRefreshCw, FiMail, FiCalendar, FiSettings, FiCheck, FiX, FiClock, FiAlertTriangle } from 'react-icons/fi'
+import { FiMail, FiUsers, FiHome, FiCheck } from 'react-icons/fi';
 
 interface User {
   id: string
@@ -186,12 +186,12 @@ export default function AdminPage() {
 
   const getSetupStatusIcon = (status: string) => {
     const icons = {
-      PENDING: FiClock,
-      IN_PROGRESS: FiRefreshCw,
+      PENDING: FiHome,
+      IN_PROGRESS: FiUsers,
       COMPLETED: FiCheck,
-      FAILED: FiX,
+      FAILED: FiMail,
     }
-    return icons[status as keyof typeof icons] || FiClock
+    return icons[status as keyof typeof icons] || FiHome
   }
 
   const getProviderBadge = (provider: string) => {
@@ -209,7 +209,7 @@ export default function AdminPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <FiStar className="text-yellow-500 text-xl" />
+              <FiMail className="text-yellow-500 text-xl" />
               <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
             </div>
             <div className="flex items-center space-x-4">
@@ -226,7 +226,7 @@ export default function AdminPage() {
                 onClick={handleSignOut}
                 className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
               >
-                <FiLogOut />
+                <FiHome />
                 <span>Sign Out</span>
               </button>
             </div>
@@ -250,7 +250,7 @@ export default function AdminPage() {
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center">
-                <FiSettings className="text-purple-600 text-2xl mr-3" />
+                <FiUsers className="text-purple-600 text-2xl mr-3" />
                 <div>
                   <p className="text-sm font-medium text-gray-600">Setup Requests</p>
                   <p className="text-2xl font-bold text-gray-900">{setupRequests.length}</p>
@@ -270,7 +270,7 @@ export default function AdminPage() {
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center">
-                <FiClock className="text-yellow-600 text-2xl mr-3" />
+                <FiHome className="text-yellow-600 text-2xl mr-3" />
                 <div>
                   <p className="text-sm font-medium text-gray-600">Pending</p>
                   <p className="text-2xl font-bold text-gray-900">
@@ -312,7 +312,7 @@ export default function AdminPage() {
                   }`}
                 >
                   <div className="flex items-center space-x-2">
-                    <FiSettings />
+                    <FiMail />
                     <span>Setup Requests</span>
                   </div>
                 </button>
@@ -331,7 +331,7 @@ export default function AdminPage() {
                       disabled={loading}
                       className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
                     >
-                      <FiRefreshCw className={loading ? 'animate-spin' : ''} />
+                      <FiCheck className={loading ? 'animate-spin' : ''} />
                       <span>Refresh</span>
                     </button>
                   </div>
@@ -390,7 +390,7 @@ export default function AdminPage() {
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               <div className="flex items-center">
-                                <FiCalendar className="mr-1" />
+                                <FiHome className="mr-1" />
                                 {formatDate(user.createdAt)}
                               </div>
                             </td>
@@ -420,7 +420,7 @@ export default function AdminPage() {
                       disabled={setupRequestsLoading}
                       className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
                     >
-                      <FiRefreshCw className={setupRequestsLoading ? 'animate-spin' : ''} />
+                      <FiUsers className={setupRequestsLoading ? 'animate-spin' : ''} />
                       <span>Refresh</span>
                     </button>
                   </div>
@@ -496,7 +496,7 @@ export default function AdminPage() {
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <div className="flex items-center">
-                                  <FiCalendar className="mr-1" />
+                                  <FiMail className="mr-1" />
                                   {formatDate(request.createdAt)}
                                 </div>
                               </td>
