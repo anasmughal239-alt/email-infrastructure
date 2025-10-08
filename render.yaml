@@ -52,20 +52,5 @@ services:
       - key: PORT
         value: "3000"
     
-    # Performance optimizations
-    disk:
-      name: email-infra-disk
-      mountPath: /opt/render/project/.next
-      sizeGB: 2
-    
     # Resource limits and scaling
     numInstances: 1
-    
-    # Routes configuration
-    routes:
-      - type: rewrite
-        source: /api/*
-        destination: /api/$1
-      - type: rewrite
-        source: /_next/static/*
-        destination: /_next/static/$1
