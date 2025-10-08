@@ -2,17 +2,14 @@ services:
   # PostgreSQL Database
   - type: pserv
     name: email-infra-db
-    env: node
     plan: free
-    databases:
-      - name: email_infra_db
-        user: email_infra_user
+    databaseName: email_infra_db
+    databaseUser: email_infra_user
     ipAllowList: []
 
   # Redis Cache (Optional - for session storage and caching)
   - type: redis
     name: email-infra-redis
-    env: node
     plan: free
     ipAllowList: []
 
@@ -60,14 +57,6 @@ services:
       name: email-infra-disk
       mountPath: /opt/render/project/.next
       sizeGB: 2
-    
-    # Advanced health check configuration
-    healthCheck:
-      path: /api/health
-      intervalSeconds: 30
-      timeoutSeconds: 15
-      unhealthyThresholdCount: 3
-      healthyThresholdCount: 2
     
     # Resource limits and scaling
     numInstances: 1
