@@ -1,12 +1,12 @@
-services:
-  # PostgreSQL Database
-  - type: pserv
-    name: email-infra-db
-    plan: free
+# PostgreSQL Database (separate section)
+databases:
+  - name: email-infra-db
     databaseName: email_infra_db
-    databaseUser: email_infra_user
+    user: email_infra_user
+    plan: free
     ipAllowList: []
 
+services:
   # Redis Cache (Optional - for session storage and caching)
   - type: redis
     name: email-infra-redis
@@ -61,21 +61,6 @@ services:
     # Resource limits and scaling
     numInstances: 1
     
-    # Custom headers for security
-    headers:
-      - path: /*
-        name: X-Frame-Options
-        value: DENY
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
-      - path: /*
-        name: Referrer-Policy
-        value: strict-origin-when-cross-origin
-      - path: /*
-        name: Permissions-Policy
-        value: camera=(), microphone=(), geolocation=()
-    
     # Routes configuration
     routes:
       - type: rewrite
@@ -84,5 +69,3 @@ services:
       - type: rewrite
         source: /_next/static/*
         destination: /_next/static/$1
-        headers:
-          Cache-Control: public, max-age=31536000, immutable
