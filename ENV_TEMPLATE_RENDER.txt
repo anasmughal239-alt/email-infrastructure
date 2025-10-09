@@ -1,0 +1,51 @@
+# Environment Variables for Render Web Service
+# Copy and paste these into your Render Web Service Environment tab
+# Replace the placeholder values with your actual values
+
+NODE_ENV=production
+NEXTAUTH_URL=https://email-infrastructure.onrender.com
+NEXTAUTH_SECRET=REPLACE_WITH_SECURE_RANDOM_STRING_32_CHARS_OR_MORE
+RESEND_API_KEY=REPLACE_WITH_YOUR_RESEND_API_KEY
+FROM_EMAIL=noreply@yourdomain.com
+NEXT_TELEMETRY_DISABLED=1
+PORT=3000
+
+# Database URL - Get this from your PostgreSQL service in Render
+# Use the INTERNAL database URL, not external
+DATABASE_URL=REPLACE_WITH_INTERNAL_POSTGRESQL_URL_FROM_RENDER
+
+# Redis URL - Get this from your Redis service in Render (Optional)
+# Use the INTERNAL redis URL, not external
+REDIS_URL=REPLACE_WITH_INTERNAL_REDIS_URL_FROM_RENDER
+
+# ============================================
+# INSTRUCTIONS FOR EACH VARIABLE:
+# ============================================
+
+# NEXTAUTH_SECRET: Generate a secure random string
+# You can use: openssl rand -base64 32
+# Or online generator: https://generate-secret.vercel.app/32
+
+# RESEND_API_KEY: Get from https://resend.com/api-keys
+# Format: re_xxxxxxxxxx
+
+# FROM_EMAIL: Use your domain email
+# Examples: noreply@yourdomain.com, hello@yourdomain.com
+
+# DATABASE_URL: From PostgreSQL service in Render
+# Format: postgresql://user:password@host:port/database
+# IMPORTANT: Use INTERNAL URL for better performance
+
+# REDIS_URL: From Redis service in Render (Optional)
+# Format: redis://user:password@host:port
+# IMPORTANT: Use INTERNAL URL for better performance
+
+# ============================================
+# QUICK SETUP CHECKLIST:
+# ============================================
+# 1. Replace NEXTAUTH_SECRET with secure random string
+# 2. Replace RESEND_API_KEY with your actual API key
+# 3. Replace FROM_EMAIL with your domain email
+# 4. Create PostgreSQL service and copy INTERNAL URL
+# 5. Create Redis service and copy INTERNAL URL (optional)
+# 6. Paste all variables into Render Web Service Environment tab
