@@ -7,18 +7,15 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "node build-render.js",
-    "build:local": "next build",
-    "build:js": "SKIP_TYPE_CHECK=true DISABLE_ESLINT_PLUGIN=true next build",
-    "build:force": "next build --no-lint",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
-    "db:migrate": "prisma migrate deploy",
-    "db:push": "prisma db push",
-    "db:studio": "prisma studio",
-    "build:production": "npm ci && prisma generate && npm run build",
-    "prebuild": "prisma generate"
+    "postinstall": "npx prisma generate",
+    "db:migrate": "npx prisma migrate deploy",
+    "db:push": "npx prisma db push",
+    "db:studio": "npx prisma studio",
+    "build:production": "npm ci && npx prisma generate && npm run build",
+    "prebuild": "npx prisma generate"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

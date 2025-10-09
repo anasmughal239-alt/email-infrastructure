@@ -17,7 +17,7 @@ try {
   
   // Generate Prisma client with explicit runtime
   console.log('🔧 Generating Prisma client...');
-  execSync('npx prisma generate --generator-provider=node-api', { stdio: 'inherit' });
+  execSync('npx prisma generate', { stdio: 'inherit' });
   
   // Build the application with error handling
   console.log('🏗️ Building application...');

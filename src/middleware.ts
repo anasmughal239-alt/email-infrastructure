@@ -1,6 +1,11 @@
 import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
-import { Role } from '@prisma/client'
+
+// Define Role enum locally to avoid importing from Prisma in middleware
+enum Role {
+  USER = 'USER',
+  ADMIN = 'ADMIN'
+}
 
 export default withAuth(
   function middleware(req) {
