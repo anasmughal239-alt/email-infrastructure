@@ -167,21 +167,21 @@ function generateEmailReport(domain: string, results: any): string {
             <div class="status">${getStatusEmoji(spf.valid, spf.exists)} SPF Record</div>
             <p><strong>Status:</strong> ${spf.exists ? (spf.valid ? 'Valid' : 'Issues Found') : 'Not Found'}</p>
             ${spf.record ? `<div class="record-text">${spf.record}</div>` : ''}
-            ${spf.issues.length > 0 ? `<div class="issues">${spf.issues.map(issue => `• ${issue}`).join('<br>')}</div>` : ''}
+            ${spf.issues.length > 0 ? `<div class="issues">${spf.issues.map((issue: string) => `• ${issue}`).join('<br>')}</div>` : ''}
           </div>
           
           <div class="record">
             <div class="status">${getStatusEmoji(dkim.valid, dkim.exists)} DKIM Record</div>
             <p><strong>Status:</strong> ${dkim.exists ? (dkim.valid ? 'Valid' : 'Issues Found') : 'Not Found'}</p>
             ${dkim.record ? `<div class="record-text">${dkim.record}</div>` : ''}
-            ${dkim.issues.length > 0 ? `<div class="issues">${dkim.issues.map(issue => `• ${issue}`).join('<br>')}</div>` : ''}
+            ${dkim.issues.length > 0 ? `<div class="issues">${dkim.issues.map((issue: string) => `• ${issue}`).join('<br>')}</div>` : ''}
           </div>
           
           <div class="record">
             <div class="status">${getStatusEmoji(dmarc.valid, dmarc.exists)} DMARC Record</div>
             <p><strong>Status:</strong> ${dmarc.exists ? (dmarc.valid ? 'Valid' : 'Issues Found') : 'Not Found'}</p>
             ${dmarc.record ? `<div class="record-text">${dmarc.record}</div>` : ''}
-            ${dmarc.issues.length > 0 ? `<div class="issues">${dmarc.issues.map(issue => `• ${issue}`).join('<br>')}</div>` : ''}
+            ${dmarc.issues.length > 0 ? `<div class="issues">${dmarc.issues.map((issue: string) => `• ${issue}`).join('<br>')}</div>` : ''}
           </div>
           
           <div class="recommendations">

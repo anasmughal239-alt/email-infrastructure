@@ -214,7 +214,9 @@ export default function VerifyEmailPage() {
               {[0, 1, 2, 3, 4, 5].map((index) => (
                 <input
                   key={index}
-                  ref={(el) => (codeInputRefs.current[index] = el)}
+                  ref={(el) => {
+                    codeInputRefs.current[index] = el;
+                  }}
                   type="text"
                   inputMode="numeric"
                   pattern="[0-9]*"

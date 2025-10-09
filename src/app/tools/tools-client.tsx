@@ -6,7 +6,8 @@ import {
   FiMail, 
   FiCheck, 
   FiUsers,
-  FiHome
+  FiHome,
+  FiDownload
 } from 'react-icons/fi';
 
 interface CheckResult {

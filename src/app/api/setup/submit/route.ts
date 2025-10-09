@@ -56,8 +56,6 @@ export async function POST(request: NextRequest) {
         data: {
           userId: user.id,
           emailProvider: data.emailProvider as any,
-          mailboxPrefix: data.mailboxConfig.prefix,
-          mailboxQuantity: data.mailboxConfig.quantity,
           status: 'IN_PROGRESS'
         }
       });
@@ -89,6 +87,7 @@ export async function POST(request: NextRequest) {
             data: {
               userId: user.id,
               setupRequestId: setupRequest.id,
+              domainId: domains[0]?.id || '', // Use the first domain's ID
               address: mailboxAddress,
               prefix: data.mailboxConfig.prefix,
               status: 'WARMING'

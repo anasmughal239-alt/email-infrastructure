@@ -76,15 +76,14 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (token) {
         session.user.id = token.sub!
-        session.user.role = token.role as string
-        session.user.subscriptionStatus = token.subscriptionStatus as string
+        session.user.role = token.role
+        session.user.subscriptionStatus = token.subscriptionStatus
       }
       return session
     },
   },
   pages: {
     signIn: '/auth/signin',
-    signUp: '/auth/signup',
   },
   cookies: {
     sessionToken: {

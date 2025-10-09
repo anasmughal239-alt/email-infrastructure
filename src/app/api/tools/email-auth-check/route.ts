@@ -505,7 +505,7 @@ async function checkDMARC(domain: string) {
     } else {
       // Validate email format in rua
       const emailPattern = /mailto:([^,\s]+)/g;
-      const emails = [...aggregateReporting.matchAll(emailPattern)];
+      const emails = Array.from(aggregateReporting.matchAll(emailPattern));
       if (emails.length === 0) {
         issues.push('Invalid aggregate reporting URI format');
         score -= 10;
@@ -518,7 +518,7 @@ async function checkDMARC(domain: string) {
     } else {
       // Validate email format in ruf
       const emailPattern = /mailto:([^,\s]+)/g;
-      const emails = [...forensicReporting.matchAll(emailPattern)];
+      const emails = Array.from(forensicReporting.matchAll(emailPattern));
       if (emails.length === 0) {
         issues.push('Invalid forensic reporting URI format');
         score -= 10;

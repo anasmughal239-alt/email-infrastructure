@@ -110,7 +110,7 @@ export function validatePassword(password: string): {
 // Clean up old rate limit entries periodically
 setInterval(() => {
   const now = Date.now()
-  for (const [key, value] of rateLimitStore.entries()) {
+  for (const [key, value] of Array.from(rateLimitStore.entries())) {
     if (now > value.resetTime) {
       rateLimitStore.delete(key)
     }

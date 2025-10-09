@@ -32,7 +32,7 @@ export async function sendVerificationEmail({ email, code, name }: EmailVerifica
       }
       
       // Handle domain verification requirement
-      if (error.statusCode === 403 && error.message?.includes('verify a domain')) {
+      if (error.message?.includes('verify a domain')) {
         throw new Error('Email service is in testing mode. Please use anasmughal239@gmail.com for testing or verify a domain at resend.com/domains.');
       }
       
