@@ -9,6 +9,8 @@
     "dev": "next dev",
     "build": "node build-render.js",
     "build:local": "next build",
+    "build:js": "SKIP_TYPE_CHECK=true DISABLE_ESLINT_PLUGIN=true next build",
+    "build:force": "next build --no-lint",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
