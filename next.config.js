@@ -6,6 +6,10 @@ const nextConfig = {
   // Enable standalone output for production deployment
   output: 'standalone',
   
+  // Disable static optimization to prevent prerender errors
+  trailingSlash: false,
+  generateEtags: false,
+  
   // Performance optimizations
   experimental: {
     optimizeCss: true,

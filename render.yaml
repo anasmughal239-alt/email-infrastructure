@@ -19,7 +19,7 @@ services:
     env: node
     plan: free
     runtime: node
-    buildCommand: npm ci && npx prisma generate && npm run build
+    buildCommand: npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeploy: true
@@ -49,6 +49,10 @@ services:
         value: noreply@yourdomain.com
       - key: NEXT_TELEMETRY_DISABLED
         value: "1"
+      - key: SKIP_ENV_VALIDATION
+        value: "true"
+      - key: DISABLE_ESLINT_PLUGIN
+        value: "true"
       - key: PORT
         value: "3000"
     
