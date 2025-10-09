@@ -19,7 +19,7 @@ services:
     env: node
     plan: free
     runtime: node
-    buildCommand: npm run build
+    buildCommand: npm run build:production
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeploy: true
@@ -55,6 +55,10 @@ services:
         value: "true"
       - key: PORT
         value: "3000"
+      - key: SKIP_TYPE_CHECK
+        value: "true"
+      - key: PRISMA_GENERATE_DATAPROXY
+        value: "false"
     
     # Resource limits and scaling
     numInstances: 1

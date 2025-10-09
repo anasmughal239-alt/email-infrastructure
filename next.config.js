@@ -26,6 +26,7 @@ const nextConfig = {
   // Webpack configuration for Node.js compatibility
   webpack: (config, { isServer }) => {
     if (!isServer) {
+      // Ensure Prisma Client is not bundled on the client side
       config.resolve.fallback = {
         fs: false,
         net: false,
@@ -42,11 +43,17 @@ const nextConfig = {
       };
     }
     
-    // Ignore Prisma warnings
-    config.externals = config.externals || [];
-    config.externals.push('@prisma/client');
+    // Properly externalize @prisma/client for server-side only
+    if (isServer) {
+      config.externals = [...(config.externals || []), '@prisma/client'];
+    }
     
     return config;
+  },
+  
+  // Experimental features to improve Prisma compatibility
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client'],
   },
 };
 

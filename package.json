@@ -17,7 +17,8 @@
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "build:production": "npm ci && prisma generate && npm run build"
+    "build:production": "npm ci && prisma generate && npm run build",
+    "prebuild": "prisma generate"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
