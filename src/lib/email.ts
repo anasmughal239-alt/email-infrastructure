@@ -165,3 +165,111 @@ export function getCodeExpirationTime(): Date {
   expirationTime.setMinutes(expirationTime.getMinutes() + 15);
   return expirationTime;
 }
+
+interface PasswordResetEmailData {
+  email: string;
+  resetUrl: string;
+  name?: string;
+  expiresAt: Date;
+}
+
+export async function sendPasswordResetEmail({
+  email,
+  resetUrl,
+  name,
+  expiresAt,
+}: PasswordResetEmailData): Promise<void> {
+  // Check if API key is configured
+  if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'your-resend-api-key') {
+    console.error('Resend API key not configured. Please set RESEND_API_KEY in your .env file.');
+    throw new Error('Email service not configured. Please contact support.');
+  }
+
+  const expirationTime = new Date(expiresAt).toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  });
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Reset Your Password</title>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .button {
+          display: inline-block;
+          padding: 12px 24px;
+          background-color: #0070f3;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+          margin: 20px 0;
+        }
+        .footer { font-size: 12px; color: #666; margin-top: 30px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h2>Reset Your Password</h2>
+        <p>Hello${name ? ` ${name}` : ''},</p>
+        <p>We received a request to reset your password. Click the button below to create a new password:</p>
+        
+        <a href="${resetUrl}" class="button">Reset Password</a>
+        
+        <p>This link will expire at ${expirationTime}. If you didn't request this password reset, you can safely ignore this email.</p>
+        
+        <p>For security reasons, we recommend resetting your password immediately.</p>
+        
+        <div class="footer">
+          <p>If the button doesn't work, copy and paste this link into your browser:</p>
+          <p>${resetUrl}</p>
+          <p>This is an automated message, please do not reply to this email.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const text = `
+    Reset Your Password
+    
+    Hello${name ? ` ${name}` : ''},
+    
+    We received a request to reset your password. Click the link below to create a new password:
+    
+    ${resetUrl}
+    
+    This link will expire at ${expirationTime}. If you didn't request this password reset, you can safely ignore this email.
+    
+    For security reasons, we recommend resetting your password immediately.
+    
+    This is an automated message, please do not reply to this email.
+  `;
+
+  try {
+    console.log('Sending password reset email to:', email);
+    const { data, error } = await resend.emails.send({
+      from: 'onboarding@resend.dev', // Always use the default Resend sender
+      to: [email],
+      subject: 'Reset Your Password',
+      html: html,
+      text: text,
+      reply_to: process.env.REPLY_TO_EMAIL,
+    });
+
+    if (error) {
+      console.error('Password reset email sending error:', error);
+      throw new Error('Failed to send password reset email');
+    }
+
+    console.log('Password reset email sent successfully to:', email);
+    return;
+  } catch (error) {
+    console.error('Password reset email service error:', error);
+    throw new Error('Email service unavailable');
+  }
+}

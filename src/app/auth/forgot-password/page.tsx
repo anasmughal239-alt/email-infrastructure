@@ -31,14 +31,28 @@ export default function ForgotPasswordPage() {
     setError('');
     setIsLoading(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsLoading(false);
-    setIsEmailSent(true);
-    
-    // Here you would typically handle the actual password reset logic
-    console.log('Password reset requested for:', email);
+    try {
+      const response = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send reset email');
+      }
+
+      setIsEmailSent(true);
+    } catch (error) {
+      console.error('Error sending reset email:', error);
+      setError('Failed to send reset email. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
