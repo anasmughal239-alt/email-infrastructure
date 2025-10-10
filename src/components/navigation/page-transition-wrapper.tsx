@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { PageSkeleton } from '@/components/loading/page-skeleton'
@@ -9,7 +9,7 @@ interface PageTransitionWrapperProps {
   children: React.ReactNode
 }
 
-export function PageTransitionWrapper({ children }: PageTransitionWrapperProps) {
+function PageTransitionContent({ children }: PageTransitionWrapperProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [pageType, setPageType] = useState('default')
   const pathname = usePathname()
@@ -61,5 +61,13 @@ export function PageTransitionWrapper({ children }: PageTransitionWrapperProps) 
         </motion.div>
       )}
     </AnimatePresence>
+  )
+}
+
+export function PageTransitionWrapper({ children }: PageTransitionWrapperProps) {
+  return (
+    <Suspense fallback={<PageSkeleton type="default" />}>
+      <PageTransitionContent>{children}</PageTransitionContent>
+    </Suspense>
   )
 }

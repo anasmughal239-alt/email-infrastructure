@@ -1,7 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { signIn, getSession } from 'next-auth/react'
+export const dynamic = 'force-dynamic'
+
+import { useState, useEffect } from 'react'
+import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -13,7 +15,21 @@ export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const [shouldRedirect, setShouldRedirect] = useState(false)
   const router = useRouter()
+  const { data: session, status } = useSession()
+
+  // Handle redirect after successful login
+  useEffect(() => {
+    if (shouldRedirect && session) {
+      if (session.user?.role === 'ADMIN') {
+        router.push('/admin')
+      } else {
+        router.push('/dashboard')
+      }
+      setShouldRedirect(false)
+    }
+  }, [session, shouldRedirect, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -30,13 +46,8 @@ export default function SignInPage() {
       if (result?.error) {
         setError('Invalid email or password')
       } else {
-        // Get session to check user role
-        const session = await getSession()
-        if (session?.user?.role === 'ADMIN') {
-          router.push('/admin')
-        } else {
-          router.push('/dashboard')
-        }
+        // Set flag to redirect after session is updated
+        setShouldRedirect(true)
       }
     } catch (error) {
       setError('An error occurred. Please try again.')

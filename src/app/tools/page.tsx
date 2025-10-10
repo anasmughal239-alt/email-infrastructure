@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import { pageMetadata } from '@/lib/metadata';
 import ToolsClient from './tools-client';
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   ...pageMetadata.tools,
   title: 'Free Email Authentication Checker | SPF, DKIM, DMARC Tool - EmailInfra',
