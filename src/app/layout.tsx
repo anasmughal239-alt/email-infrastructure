@@ -1,46 +1,21 @@
-import { ReactNode } from 'react';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { ThemeProvider } from '@/components/theme-provider';
-import { Navbar } from '@/components/navbar';
-import { Footer } from '@/components/footer';
-import AuthProvider from '@/components/providers/session-provider';
-import { PageTransitionWrapper } from '@/components/navigation/page-transition-wrapper';
-import { CSSOptimizer } from '@/components/css-optimizer';
-import { CSSPreloader } from '@/components/css-preloader';
-import { generateMetadata, pageMetadata } from '@/lib/metadata';
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import SupabaseProvider from '@/components/providers/supabase-provider'
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = generateMetadata(pageMetadata.home);
+export const metadata: Metadata = {
+  title: 'Email Infrastructure',
+  description: 'A modern email infrastructure solution',
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}): JSX.Element {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={inter.className}>
-        <CSSOptimizer />
-        <CSSPreloader />
-        <AuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            <div className="pt-16">
-              <PageTransitionWrapper>
-                {children}
-              </PageTransitionWrapper>
-            </div>
-            <Footer />
-          </ThemeProvider>
-        </AuthProvider>
+        <SupabaseProvider>{children}</SupabaseProvider>
       </body>
     </html>
-  );
+  )
 }

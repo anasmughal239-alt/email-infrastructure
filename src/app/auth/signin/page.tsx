@@ -2,12 +2,12 @@
 
 export const dynamic = 'force-dynamic'
 
-import { useState, useEffect } from 'react'
-import { signIn, useSession } from 'next-auth/react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { FiEye, FiEyeOff, FiLock, FiMail } from 'react-icons/fi';
+import { FiEye, FiEyeOff, FiLock, FiMail } from 'react-icons/fi'
+import { supabase } from '@/lib/supabase/client'
 
 export default function SignInPage() {
   const [email, setEmail] = useState('')
@@ -15,21 +15,7 @@ export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-  const [shouldRedirect, setShouldRedirect] = useState(false)
   const router = useRouter()
-  const { data: session, status } = useSession()
-
-  // Handle redirect after successful login
-  useEffect(() => {
-    if (shouldRedirect && session) {
-      if (session.user?.role === 'ADMIN') {
-        router.push('/admin')
-      } else {
-        router.push('/dashboard')
-      }
-      setShouldRedirect(false)
-    }
-  }, [session, shouldRedirect, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,17 +23,20 @@ export default function SignInPage() {
     setError('')
 
     try {
-      const result = await signIn('credentials', {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
-        redirect: false,
       })
 
-      if (result?.error) {
+      if (signInError) {
         setError('Invalid email or password')
+        return
+      }
+
+      if (data.user?.user_metadata.role === 'ADMIN') {
+        router.push('/admin')
       } else {
-        // Set flag to redirect after session is updated
-        setShouldRedirect(true)
+        router.push('/dashboard')
       }
     } catch (error) {
       setError('An error occurred. Please try again.')

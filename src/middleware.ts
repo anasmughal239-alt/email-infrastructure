@@ -1,106 +1,84 @@
-import { withAuth } from 'next-auth/middleware'
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-// Define Role enum locally to avoid importing from Prisma in middleware
-enum Role {
-  USER = 'USER',
-  ADMIN = 'ADMIN'
-}
+export async function middleware(request: NextRequest) {
+  try {
+    // Create a Supabase client configured to use cookies
+    const supabase = createMiddlewareClient({ req: request, res: NextResponse.next() })
 
-export default withAuth(
-  function middleware(req) {
-    const token = req.nextauth.token
-    const { pathname } = req.nextUrl
+    // Refresh session if expired - required for Server Components
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
 
-    // Admin routes protection
-    if (pathname.startsWith('/admin')) {
-      if (!token || token.role !== Role.ADMIN) {
-        return NextResponse.redirect(new URL('/auth/signin', req.url))
+    // If no session and trying to access protected routes
+    if (!session) {
+      const isProtectedRoute =
+        request.nextUrl.pathname.startsWith('/admin') ||
+        request.nextUrl.pathname.startsWith('/dashboard') ||
+        request.nextUrl.pathname.startsWith('/api/admin') ||
+        request.nextUrl.pathname.startsWith('/api/dashboard')
+
+      if (isProtectedRoute) {
+        const redirectUrl = new URL('/auth/signin', request.url)
+        redirectUrl.searchParams.set('redirect', request.nextUrl.pathname)
+        return NextResponse.redirect(redirectUrl)
       }
     }
 
-    // Dashboard routes protection
-    if (pathname.startsWith('/dashboard')) {
-      if (!token) {
-        return NextResponse.redirect(new URL('/auth/signin', req.url))
+    // Check role-based access
+    if (session) {
+      const userRole = session.user.user_metadata.role
+
+      // Admin routes protection
+      if (
+        request.nextUrl.pathname.startsWith('/admin') ||
+        request.nextUrl.pathname.startsWith('/api/admin')
+      ) {
+        if (userRole !== 'ADMIN') {
+          return NextResponse.redirect(new URL('/dashboard', request.url))
+        }
+      }
+
+      // Dashboard routes protection (allow both admin and regular users)
+      if (
+        request.nextUrl.pathname.startsWith('/dashboard') ||
+        request.nextUrl.pathname.startsWith('/api/dashboard')
+      ) {
+        if (!['ADMIN', 'USER'].includes(userRole)) {
+          return NextResponse.redirect(new URL('/auth/signin', request.url))
+        }
       }
     }
 
-    // API admin routes protection
-    if (pathname.startsWith('/api/admin')) {
-      if (!token || token.role !== Role.ADMIN) {
-        return NextResponse.json(
-          { error: 'Forbidden - Admin access required' },
-          { status: 403 }
-        )
-      }
-    }
-
-    // Protected API routes
-    if (pathname.startsWith('/api/auth/profile')) {
-      if (!token) {
-        return NextResponse.json(
-          { error: 'Unauthorized' },
-          { status: 401 }
-        )
-      }
-    }
-
-    // Add security headers
-    const response = NextResponse.next()
-    
     // Security headers
-    response.headers.set('X-Frame-Options', 'DENY')
-    response.headers.set('X-Content-Type-Options', 'nosniff')
-    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
-    response.headers.set('X-XSS-Protection', '1; mode=block')
+    const response = NextResponse.next()
+    response.headers.set('x-frame-options', 'DENY')
+    response.headers.set('x-content-type-options', 'nosniff')
+    response.headers.set('x-xss-protection', '1; mode=block')
     response.headers.set(
-      'Content-Security-Policy',
-      "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none';"
-    )
-    response.headers.set(
-      'Strict-Transport-Security',
+      'strict-transport-security',
       'max-age=31536000; includeSubDomains; preload'
     )
-    
-    return response
-  },
-  {
-    callbacks: {
-      authorized: ({ token, req }) => {
-        const { pathname } = req.nextUrl
-        
-        // Allow public routes
-        if (
-          pathname.startsWith('/api/auth/register') ||
-          pathname.startsWith('/api/auth/signin') ||
-          pathname.startsWith('/api/auth/callback') ||
-          pathname.startsWith('/api/auth/session') ||
-          pathname.startsWith('/api/auth/providers') ||
-          pathname.startsWith('/auth/') ||
-          pathname === '/' ||
-          pathname.startsWith('/terms') ||
-          pathname.startsWith('/privacy') ||
-          pathname.startsWith('/contact') ||
-          pathname.startsWith('/integrations') ||
-          pathname.startsWith('/_next') ||
-          pathname.startsWith('/favicon')
-        ) {
-          return true
-        }
 
-        // For protected routes, require authentication
-        return !!token
-      },
-    },
+    return response
+  } catch (error) {
+    // Log error and redirect to sign-in page
+    console.error('Middleware error:', error)
+    return NextResponse.redirect(new URL('/auth/signin', request.url))
   }
-)
+}
 
 export const config = {
   matcher: [
-    '/dashboard/:path*',
-    '/admin/:path*',
-    '/api/auth/profile',
-    '/api/admin/:path*'
-  ]
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public (public files)
+     */
+    '/((?!_next/static|_next/image|favicon.ico|public).*)',
+  ],
 }
