@@ -2,7 +2,6 @@
 
 export const dynamic = 'force-dynamic';
 
-import { useSupabase } from '@/components/providers/supabase-provider'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { motion } from 'framer-motion';
@@ -67,18 +66,7 @@ const recentMailboxes = [
 ];
 
 export default function DashboardPage() {
-  const { session } = useSupabase()
   const router = useRouter()
-
-  useEffect(() => {
-    if (!session) {
-      router.push('/auth/signin')
-    }
-  }, [session, router])
-
-  if (!session) {
-    return null
-  }
 
   return (
     <div className="space-y-6">

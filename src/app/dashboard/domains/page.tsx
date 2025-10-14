@@ -10,7 +10,6 @@ import {
   FiCheck
 } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
-import { useSupabase } from '@/components/providers/supabase-provider';
 import { useRouter } from 'next/navigation';
 
 interface Domain {
@@ -50,7 +49,6 @@ const statusConfig = {
 };
 
 export default function DomainsPage() {
-  const { session } = useSupabase();
   const router = useRouter();
   const [domains, setDomains] = useState<Domain[]>([]);
   const [loading, setLoading] = useState(true);
@@ -60,19 +58,10 @@ export default function DomainsPage() {
   const [newDomain, setNewDomain] = useState('');
   const [addingDomain, setAddingDomain] = useState(false);
 
-  // Redirect if not authenticated
-  useEffect(() => {
-    if (!session) {
-      router.push('/auth/signin');
-    }
-  }, [session, router]);
-
   // Fetch domains data
   useEffect(() => {
-    if (session?.user?.email) {
-      fetchDomains();
-    }
-  }, [session]);
+    fetchDomains();
+  }, []);
 
   const fetchDomains = async () => {
     try {

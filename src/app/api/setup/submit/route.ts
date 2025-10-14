@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { db } from '@/lib/db';
 
 interface SetupSubmissionData {
@@ -9,18 +8,17 @@ interface SetupSubmissionData {
     prefix: string;
     quantity: number;
   };
+  email?: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = createServerSupabaseClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    
-    if (!user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const data: SetupSubmissionData = await request.json();
+    const requesterEmail = data.email;
+
+    if (!requesterEmail) {
+      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    }
 
     // Validate required fields
     if (!data.domains || data.domains.length === 0) {
@@ -37,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     // Get user from database
     const appUser = await db.user.findUnique({
-      where: { email: user.email },
+      where: { email: requesterEmail },
       select: { id: true, setupCompleted: true }
     });
 

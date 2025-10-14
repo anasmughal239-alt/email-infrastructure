@@ -1,26 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { db } from '@/lib/db'
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = createServerSupabaseClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user?.email) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
-    }
-
-    // Check if user has admin role
-    if (user.user_metadata?.role !== 'ADMIN') {
-      return NextResponse.json(
-        { error: 'Forbidden - Admin access required' },
-        { status: 403 }
-      )
-    }
+    // Authentication removed; endpoint is public for now
 
     const setupRequests = await db.setupRequest.findMany({
       include: {
@@ -73,23 +56,7 @@ export async function GET(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   try {
-    const supabase = createServerSupabaseClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user?.email) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
-    }
-
-    // Check if user has admin role
-    if (user.user_metadata?.role !== 'ADMIN') {
-      return NextResponse.json(
-        { error: 'Forbidden - Admin access required' },
-        { status: 403 }
-      )
-    }
+    // Authentication removed; endpoint is public for now
 
     const { setupRequestId, status } = await request.json()
 
