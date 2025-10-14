@@ -88,3 +88,23 @@
     @apply w-full px-4 py-2 border border-input dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-ring dark:bg-gray-900 dark:text-white transition-all duration-200;
   }
 }
+
+/* Header-only: hide any auth CTA anchors/buttons regardless of path variant */
+@layer base {
+  nav a[href="/auth/signin"],
+  nav a[href="/auth/signup"],
+  nav a[href*="/auth/signin"],
+  nav a[href*="/auth/signup"],
+  nav a[href*="/auth/login"],
+  nav a[href*="/auth/register"],
+  nav a[href*="/login"],
+  nav a[href*="/signin"],
+  nav a[href*="/sign-in"],
+  nav a[href*="/signup"],
+  nav a[href*="/sign-up"],
+  nav a[href*="/register"],
+  nav button[data-auth="signin"],
+  nav button[data-auth="signup"] {
+    display: none !important;
+  }
+}
