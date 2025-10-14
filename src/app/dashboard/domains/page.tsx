@@ -10,7 +10,7 @@ import {
   FiCheck
 } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { useSupabase } from '@/components/providers/supabase-provider';
 import { useRouter } from 'next/navigation';
 
 interface Domain {
@@ -50,7 +50,7 @@ const statusConfig = {
 };
 
 export default function DomainsPage() {
-  const { data: session, status } = useSession();
+  const { session } = useSupabase();
   const router = useRouter();
   const [domains, setDomains] = useState<Domain[]>([]);
   const [loading, setLoading] = useState(true);
@@ -62,10 +62,10 @@ export default function DomainsPage() {
 
   // Redirect if not authenticated
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    if (!session) {
       router.push('/auth/signin');
     }
-  }, [status, router]);
+  }, [session, router]);
 
   // Fetch domains data
   useEffect(() => {
@@ -122,7 +122,7 @@ export default function DomainsPage() {
     }
   };
 
-  if (status === 'loading' || loading) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <FiUsers className="w-8 h-8 animate-spin text-primary" />

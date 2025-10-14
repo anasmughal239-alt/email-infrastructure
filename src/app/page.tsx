@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiCheck, FiChevronDown, FiChevronUp, FiLink, FiMail, FiSettings } from 'react-icons/fi';
 import { useState } from 'react';
+import { LayoutWrapper } from '@/components/layout-wrapper';
+import Image from 'next/image';
+import { HeroImage } from '@/components/sections/hero-image';
 
 // Hero Section Component
 const HeroSection = () => {
@@ -54,16 +57,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative w-full max-w-2xl mx-auto">
-              <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur shadow-2xl border border-primary/20">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">📧</div>
-                    <p className="text-muted-foreground font-medium">Cold Email Dashboard</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <HeroImage className="relative w-full max-w-2xl mx-auto" />
           </motion.div>
         </div>
       </div>
@@ -508,14 +502,16 @@ const FAQAccordion = () => {
 // Main Homepage Component
 export default function Home(): JSX.Element {
   return (
-    <main className="min-h-screen">
-      <HeroSection />
-      <TrustBadges />
-      <FeaturesGrid />
-      <HowItWorks />
-      <PricingPreview />
-      <TestimonialsCarousel />
-      <FAQAccordion />
-    </main>
+    <LayoutWrapper>
+      <main className="min-h-screen">
+        <HeroSection />
+        <TrustBadges />
+        <FeaturesGrid />
+        <HowItWorks />
+        <PricingPreview />
+        <TestimonialsCarousel />
+        <FAQAccordion />
+      </main>
+    </LayoutWrapper>
   );
 }

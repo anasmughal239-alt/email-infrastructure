@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic';
 
-import { useSession, signOut } from 'next-auth/react'
+import { useSupabase } from '@/components/providers/supabase-provider'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { motion } from 'framer-motion';
@@ -67,22 +67,14 @@ const recentMailboxes = [
 ];
 
 export default function DashboardPage() {
-  const { data: session, status } = useSession()
+  const { session } = useSupabase()
   const router = useRouter()
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    if (!session) {
       router.push('/auth/signin')
     }
-  }, [status, router])
-
-  if (status === 'loading') {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
-      </div>
-    )
-  }
+  }, [session, router])
 
   if (!session) {
     return null

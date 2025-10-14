@@ -1,28 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth-config';
+import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { db } from '@/lib/db';
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const supabase = createServerSupabaseClient();
+    const { data: { user } } = await supabase.auth.getUser();
     
-    if (!session?.user?.email) {
+    if (!user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     // Get user from database
-    const user = await db.user.findUnique({
-      where: { email: session.user.email }
+    const appUser = await db.user.findUnique({
+      where: { email: user.email }
     });
 
-    if (!user) {
+    if (!appUser) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     // Fetch mailboxes with related domain data
     const mailboxes = await db.mailbox.findMany({
-      where: { userId: user.id },
+      where: { userId: appUser.id },
       include: {
         domain: true,
         setupRequest: true

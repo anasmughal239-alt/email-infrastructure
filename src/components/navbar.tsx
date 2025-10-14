@@ -40,12 +40,6 @@ export function Navbar(): JSX.Element {
           </div>
           <div className="hidden md:flex items-center space-x-4">
             <ThemeToggle />
-            <Link href="/auth/login" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors">
-              Login
-            </Link>
-            <Link href="/auth/signup" className="btn-primary">
-              Sign up
-            </Link>
           </div>
           <div className="flex items-center md:hidden">
             <ThemeToggle />
@@ -86,12 +80,6 @@ export function Navbar(): JSX.Element {
               </Link>
               <Link href="/demo" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                 Demo
-              </Link>
-              <Link href="/auth/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                Login
-              </Link>
-              <Link href="/auth/signup" className="block w-full text-center btn-primary">
-                Sign up
               </Link>
             </div>
           </motion.div>
