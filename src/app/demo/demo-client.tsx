@@ -253,15 +253,6 @@ export default function DemoClient() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.a 
-              href="/auth/signup"
-              className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Start Free Trial
-              <FiArrowRight className="h-5 w-5" />
-            </motion.a>
-            <motion.a 
               href="/contact"
               className="btn-secondary text-lg px-8 py-4"
               whileHover={{ scale: 1.05 }}
