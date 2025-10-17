@@ -1,58 +1,115 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FiCheckCircle, FiHome, FiLink, FiMail, FiSettings, FiShield, FiZap } from 'react-icons/fi';
+import { FiCheckCircle, FiServer, FiMail, FiSettings, FiShield, FiZap, FiDatabase, FiUsers, FiLock, FiTrendingUp } from 'react-icons/fi';
 
 const features = [
   {
+    icon: FiServer,
+    title: 'Dedicated SMTP Infrastructure',
+    description: 'Enterprise-grade PowerMTA infrastructure, fully isolated and optimized for your sending needs.',
+    benefits: [
+      'Dedicated PowerMTA environment',
+      'Custom routing rules',
+      'Isolated IP pools',
+      'Automatic scaling'
+    ],
+    badge: 'CORE',
+    illustration: '🚀'
+  },
+  {
+    icon: FiTrendingUp,
+    title: 'Deliverability Optimization',
+    description: 'Continuous monitoring and optimization by our expert team to ensure maximum inbox placement.',
+    benefits: [
+      'Inbox placement testing',
+      'ISP feedback loop integration',
+      'Real-time spam monitoring',
+      'Inbox vs. Promotions tracking'
+    ],
+    illustration: '📈'
+  },
+  {
+    icon: FiMail,
+    title: 'Email Verification & Hygiene',
+    description: 'Built-in email validation and list cleaning to maintain pristine sending reputation.',
+    benefits: [
+      'Real-time email validation',
+      'Invalid address detection',
+      'Role-based email filtering',
+      '30% higher inbox rates'
+    ],
+    illustration: '✨'
+  },
+  {
     icon: FiSettings,
-    title: 'Automated Domain & DNS Setup',
-    description: 'Complete automated setup of SPF, DKIM, and DMARC records for maximum deliverability. No technical knowledge required.',
-    benefits: ['One-click SPF configuration', 'Automatic DKIM signing', 'DMARC policy setup', 'DNS propagation monitoring'],
-    badge: 'FREE',
-    illustration: '🔧'
-  },
-  {
-    icon: FiMail,
-    title: 'Pre-warmed Google & Microsoft Inboxes',
-    description: 'Access to regular and pre-warmed email accounts from Google Workspace and Microsoft 365 for instant high deliverability.',
-    benefits: ['Pre-warmed Gmail accounts', 'Microsoft 365 inboxes', 'Instant high reputation', 'Multiple account types'],
-    illustration: '📧'
-  },
-  {
-    icon: FiMail,
-    title: 'Deliverability Insights Dashboard',
-    description: 'Real-time analytics and insights into your email performance, deliverability rates, and sender reputation.',
-    benefits: ['Real-time deliverability tracking', 'Sender reputation monitoring', 'Bounce rate analysis', 'Spam folder detection'],
-    illustration: '📊'
-  },
-  {
-    icon: FiLink,
-    title: '50+ Outreach Tool Integrations',
-    description: 'Seamlessly integrate with popular cold email tools like Lemlist, Instantly, Reply.io, and many more.',
-    benefits: ['Lemlist integration', 'Instantly.ai support', 'Reply.io connector', '50+ tool compatibility'],
-    illustration: '🔗'
+    title: 'IP & Domain Warm-Up',
+    description: 'AI-driven warm-up process that safely establishes your sending reputation.',
+    benefits: [
+      'Gradual volume increase',
+      'AI-powered scheduling',
+      'Spam trap avoidance',
+      'Reputation tracking'
+    ],
+    illustration: '🌡️'
   }
 ];
 
 const additionalFeatures = [
   {
     icon: FiShield,
-    title: 'Advanced Security',
-    description: 'Enterprise-grade security with encryption and compliance features.',
-    benefits: ['End-to-end encryption', 'GDPR compliance', 'SOC 2 certified']
+    title: 'Authentication & Compliance',
+    description: 'Complete email authentication setup with ongoing compliance monitoring.',
+    benefits: [
+      'SPF, DKIM, DMARC setup',
+      'Custom envelope configs',
+      'GDPR compliance',
+      'Blacklist monitoring'
+    ]
+  },
+  {
+    icon: FiDatabase,
+    title: 'Monitoring & Analytics',
+    description: 'Comprehensive visibility into your email delivery performance.',
+    benefits: [
+      'Daily performance logs',
+      'Bounce tracking',
+      'IP reputation monitoring',
+      'Deliverability trends'
+    ]
+  },
+  {
+    icon: FiUsers,
+    title: 'Dedicated Management',
+    description: 'Expert oversight and optimization of your email infrastructure.',
+    benefits: [
+      'Dedicated manager',
+      'Manual oversight',
+      'Weekly optimization',
+      'Enterprise support'
+    ]
   },
   {
     icon: FiZap,
-    title: 'Lightning Setup',
-    description: 'Get started in minutes with our automated onboarding process.',
-    benefits: ['5-minute setup', 'Automated configuration', 'Instant activation']
+    title: 'Data & Lead Management',
+    description: '600K+ verified lead database with monthly updates and segmentation.',
+    benefits: [
+      'Industry segmentation',
+      'Geographic targeting',
+      'Monthly updates',
+      'Clean imports'
+    ]
   },
   {
-    icon: FiHome,
-    title: 'Global Infrastructure',
-    description: 'Worldwide email delivery with optimized routing and local compliance.',
-    benefits: ['Global delivery network', 'Local compliance', 'Multi-region support']
+    icon: FiLock,
+    title: 'Security & Reliability',
+    description: 'Enterprise-grade security with 99.9% uptime SLA guarantee.',
+    benefits: [
+      'TLS encryption',
+      'Multi-server redundancy',
+      'Access management',
+      'Daily backups'
+    ]
   }
 ];
 
@@ -77,28 +134,43 @@ const itemVariants = {
   }
 };
 
-export default function FeaturesClient(): JSX.Element {
+export default function FeaturesClient() {
   return (
-    <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4">
-        {/* Header */}
+    <div className="min-h-screen bg-[#f8f9fa]">
+      <div className="container mx-auto px-4 py-20">
+        {/* Hero Section */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Everything You Need for <span className="text-primary">Cold Email Success</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#1a3a54]">
+            All the Power of Enterprise Email Infrastructure — Managed for You
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            From automated domain setup to pre-warmed inboxes and powerful integrations - scale your outreach with confidence.
+          <p className="text-xl text-[#496b87] max-w-3xl mx-auto mb-8">
+            SendingOps takes care of everything behind email delivery: from SMTP setup to deliverability tracking. 
+            No need for developers, warm-up tools, or email reputation management — it's all included.
           </p>
+          <div className="flex justify-center items-center space-x-8 text-lg font-semibold text-[#7d8898]">
+            <div className="flex items-center">
+              <FiCheckCircle className="text-[#496b87] mr-2" />
+              <span>20,000+ emails per day</span>
+            </div>
+            <div className="flex items-center">
+              <FiCheckCircle className="text-[#496b87] mr-2" />
+              <span>98% inbox rate</span>
+            </div>
+            <div className="flex items-center">
+              <FiCheckCircle className="text-[#496b87] mr-2" />
+              <span>99.9% uptime SLA</span>
+            </div>
+          </div>
         </motion.div>
 
-        {/* Main Features Grid */}
+        {/* Main Features */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -106,33 +178,32 @@ export default function FeaturesClient(): JSX.Element {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="card hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
+              className="bg-white rounded-xl p-8 border border-[#d0c9be] hover:shadow-lg transition-all duration-300 group relative"
               variants={itemVariants}
-              whileHover={{ y: -5 }}
             >
               {feature.badge && (
-                <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-4 right-4 bg-[#1a3a54] text-white px-3 py-1 rounded-full text-sm font-semibold">
                   {feature.badge}
                 </div>
               )}
               
               <div className="flex items-start mb-6">
-                <div className="p-4 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 mr-4">
+                <div className="p-4 rounded-xl bg-[#9ebfb1]/10 text-[#496b87] group-hover:bg-[#496b87] group-hover:text-white transition-all duration-300 mr-4">
                   <feature.icon className="h-8 w-8" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-2">{feature.title}</h3>
+                  <h3 className="text-2xl font-bold mb-2 text-[#1a3a54]">{feature.title}</h3>
                   <div className="text-4xl mb-4">{feature.illustration}</div>
                 </div>
               </div>
               
-              <p className="text-muted-foreground mb-6 text-lg leading-relaxed">{feature.description}</p>
+              <p className="text-[#496b87] mb-6 text-lg leading-relaxed">{feature.description}</p>
               
               <ul className="space-y-3">
                 {feature.benefits.map((benefit, benefitIndex) => (
                   <li key={benefitIndex} className="flex items-center">
-                    <FiCheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span className="text-sm font-medium">{benefit}</span>
+                    <FiCheckCircle className="h-5 w-5 text-[#9ebfb1] mr-3 flex-shrink-0" />
+                    <span className="text-sm font-medium text-[#7d8898]">{benefit}</span>
                   </li>
                 ))}
               </ul>
@@ -142,71 +213,65 @@ export default function FeaturesClient(): JSX.Element {
 
         {/* Additional Features */}
         <motion.div 
-          className="mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <h2 className="text-3xl font-bold text-center mb-12">Plus These Powerful Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {additionalFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="card hover:shadow-lg transition-all duration-300 group text-center"
-                whileHover={{ y: -3 }}
-              >
-                <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 w-fit mx-auto mb-4">
-                  <feature.icon className="h-6 w-6" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4">{feature.description}</p>
-                <ul className="space-y-1">
-                  {feature.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex} className="text-xs text-muted-foreground">
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
+          <h2 className="text-3xl font-bold mb-4 text-[#1a3a54]">Comprehensive Email Infrastructure</h2>
+          <p className="text-lg text-[#496b87] max-w-2xl mx-auto">
+            We don't just send your emails — we provide a complete infrastructure solution with expert management and detailed analytics.
+          </p>
         </motion.div>
 
-        {/* CTA Banner */}
         <motion.div 
-          className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-primary/80 text-primary-foreground p-8 md:p-12 text-center"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {additionalFeatures.map((feature, index) => (
+            <motion.div
+              key={index}
+              className="bg-white rounded-xl p-6 border border-[#d0c9be] hover:shadow-lg transition-all duration-300"
+              variants={itemVariants}
+            >
+              <div className="p-3 rounded-lg bg-[#9ebfb1]/10 text-[#496b87] w-fit mb-6">
+                <feature.icon className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-[#1a3a54]">{feature.title}</h3>
+              <p className="text-[#496b87] mb-4">{feature.description}</p>
+              <ul className="space-y-2">
+                {feature.benefits.map((benefit, benefitIndex) => (
+                  <li key={benefitIndex} className="flex items-center">
+                    <FiCheckCircle className="h-4 w-4 text-[#9ebfb1] mr-2 flex-shrink-0" />
+                    <span className="text-sm text-[#7d8898]">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div
+          className="text-center bg-[#1a3a54] rounded-2xl p-12 text-white"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <div className="absolute inset-0 bg-black/10" />
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Start Scaling in 5 Minutes
-            </h2>
-            <p className="text-lg md:text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Join thousands of businesses already using our platform to scale their cold email outreach. 
-              Setup is instant, results are immediate.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button 
-                className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get Started Free
-              </motion.button>
-              <motion.button 
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Watch Demo
-              </motion.button>
-            </div>
-            <p className="text-sm opacity-75 mt-4">
-              No credit card required • 14-day free trial • Cancel anytime
-            </p>
+          <h2 className="text-3xl font-bold mb-4">Your Email Delivery is Mission-Critical</h2>
+          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+            Let our experts handle your email infrastructure while you focus on growing your business. 
+            With SendingOps, you get enterprise-grade delivery with none of the complexity.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-white text-[#1a3a54] px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#d0c9be] transition-colors duration-300">
+              Schedule a Demo
+            </button>
+            <button className="border-2 border-[#9ebfb1] bg-transparent text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#9ebfb1] hover:text-[#1a3a54] transition-colors duration-300">
+              View Pricing
+            </button>
           </div>
         </motion.div>
       </div>

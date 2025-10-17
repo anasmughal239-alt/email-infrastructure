@@ -45,15 +45,15 @@ export default function ContactPage() {
       title: 'Email Support',
       description: 'Get help with technical issues and account questions',
       icon: FiMail,
-      contact: 'support@emailinfra.com',
-      response: 'Response within 4 hours',
+      contact: 'support@sendingops.com',
+      response: 'Response within 2 hours',
       color: 'bg-blue-100 text-blue-600'
     },
     {
       title: 'Phone Support',
       description: 'Speak directly with our support team',
       icon: FiPhone,
-      contact: '+1 (555) 123-4567',
+      contact: '+1 (800) 123-4567',
       response: 'Available 24/7',
       color: 'bg-green-100 text-green-600'
     },
@@ -62,15 +62,15 @@ export default function ContactPage() {
       description: 'Instant help for urgent issues',
       icon: FiMessageSquare,
       contact: 'Available in dashboard',
-      response: 'Average response: 2 minutes',
+      response: 'Average response: 1 minute',
       color: 'bg-purple-100 text-purple-600'
     },
     {
       title: 'Enterprise Support',
       description: 'Dedicated support for enterprise customers',
       icon: FiHeadphones,
-      contact: 'enterprise@emailinfra.com',
-      response: 'Priority support',
+      contact: 'enterprise@sendingops.com',
+      response: 'Priority support with dedicated account manager',
       color: 'bg-orange-100 text-orange-600'
     }
   ]
@@ -78,28 +78,28 @@ export default function ContactPage() {
   const offices = [
     {
       city: 'San Francisco',
-      address: '123 Tech Street, San Francisco, CA 94105',
-      phone: '+1 (555) 123-4567',
-      hours: 'Mon-Fri: 9AM-6PM PST'
+      address: '100 SendingOps Plaza, San Francisco, CA 94105',
+      phone: '+1 (800) 123-4567',
+      hours: 'Mon-Fri: 8AM-8PM PST'
     },
     {
-      city: 'New York',
-      address: '456 Business Ave, New York, NY 10001',
-      phone: '+1 (555) 987-6543',
-      hours: 'Mon-Fri: 9AM-6PM EST'
+      city: 'Austin',
+      address: '200 Email Drive, Austin, TX 78701',
+      phone: '+1 (800) 123-4567',
+      hours: 'Mon-Fri: 8AM-8PM CST'
     },
     {
-      city: 'London',
-      address: '789 Innovation Road, London, UK EC1A 1BB',
-      phone: '+44 20 7123 4567',
-      hours: 'Mon-Fri: 9AM-5PM GMT'
+      city: 'Amsterdam',
+      address: '300 Sending Street, Amsterdam, 1012 AB',
+      phone: '+31 20 123 4567',
+      hours: 'Mon-Fri: 9AM-6PM CET'
     }
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-background border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -107,10 +107,11 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Contact Us
+            <h1 className="text-4xl font-bold mb-4">
+              <span className="text-foreground">Contact </span>
+              <span className="text-primary">Us</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Get in touch with our team. We're here to help with any questions or support you need.
             </p>
           </motion.div>
@@ -124,7 +125,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-8"
+            className="bg-card rounded-xl shadow-sm border border-gray-200 p-8"
           >
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h2>
             

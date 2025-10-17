@@ -1,26 +1,37 @@
-"use client"
+'use client'
 
-import { Navbar } from "./navbar"
-import { Footer } from "./footer"
-import { motion } from "framer-motion"
+import { motion } from 'framer-motion'
+import { usePathname } from 'next/navigation'
+import { Navbar } from './navbar'
+import { Footer } from './footer'
 
 interface LayoutWrapperProps {
   children: React.ReactNode
 }
 
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
+  const pathname = usePathname()
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <motion.main 
-        className="flex-grow"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+    <motion.div
+      key={pathname}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="min-h-screen bg-[var(--background)] text-[var(--text-primary)]"
+    >
+      <div className="relative z-10">
+        <Navbar />
         {children}
-      </motion.main>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+
+      {/* Background gradient effects */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-primary opacity-5 blur-3xl rounded-full" />
+        <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-gradient-primary opacity-5 blur-3xl rounded-full" />
+      </div>
+    </motion.div>
   )
 }
